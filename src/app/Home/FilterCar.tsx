@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Car = {
   id: number;
@@ -48,7 +49,7 @@ const cars: Car[] = [
   },
 ];
 
-export default function CarListing() {
+export default function FilterCar() {
   const [selectedMake, setSelectedMake] = useState("Any");
 
   const makes = ["Any", ...new Set(cars.map((car) => car.make))];
@@ -83,24 +84,23 @@ export default function CarListing() {
       {/* Cars Grid */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredCars.map((car) => (
-          <div
-            key={car.id}
-            className="text-black rounded-xl shadow hover:shadow-lg transition p-3"
-          >
-            <Image
-              src={car.image}
-              alt={car.title}
-              width={400}
-              height={300}
-              className="rounded-lg object-cover w-full h-48"
-            />
-            <h3 className="mt-3 font-semibold text-lg text-center">
-              {car.title}
-            </h3>
-            <p className="text-blue-600 text-center font-bold">
-              ${car.price.toLocaleString()}
-            </p>
-          </div>
+          <Link key={car.id} href="/CarDetails">
+            <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
+              <Image
+                src={car.image}
+                alt={car.title}
+                width={400}
+                height={300}
+                className="rounded-lg object-cover w-full h-48"
+              />
+              <h3 className="mt-3 font-semibold text-lg text-center">
+                {car.title}
+              </h3>
+              <p className="text-blue-600 text-center font-bold">
+                ${car.price.toLocaleString()}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
     </section>
