@@ -1,4 +1,4 @@
-// components/CarDetails.tsx
+
 "use client";
 import React from "react";
 

@@ -50,7 +50,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Banner from "@/components/Banner";
-import CarDetail from "../CarDetail"; // ✅ component ko import kiya
+import CarDetail from "../CarDetail"; 
 import CarGallery from "@/components/CarGallery";
 import EnquiryForm from "../EnquiryForm";
 
