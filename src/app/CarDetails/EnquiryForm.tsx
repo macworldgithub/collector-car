@@ -147,7 +147,7 @@
 
 "use client";
 import React, { useState } from "react";
-
+// import { baseUrl } from "../utils/config";
 export default function EnquiryForm() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -160,6 +160,7 @@ export default function EnquiryForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -192,8 +193,21 @@ export default function EnquiryForm() {
     setSuccess(null);
     setError(null);
 
+    // try {
+    //   const res = await fetch("http://localhost:3009/enquiry", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(formData),
+    //   });
+
+    //   if (!res.ok) {
+    //     throw new Error("Failed to submit enquiry");
+    //   }
+
     try {
-      const res = await fetch("http://localhost:3009/enquiry", {
+      const res = await fetch(`${baseUrl}/enquiry`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
