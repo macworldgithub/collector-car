@@ -126,7 +126,8 @@ export default function FilterCar() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3009";
+  // const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3009";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -149,9 +150,10 @@ export default function FilterCar() {
           make: car.make,
           title: car.title,
           price: car.price,
-          image: car.images && car.images.length > 0 
-            ? `${baseUrl}${car.images[0]}` 
-            : "/default-car.jpg",
+          image:
+            car.images && car.images.length > 0
+              ? `${baseUrl}${car.images[0]}`
+              : "/default-car.jpg",
         }));
 
         setCars(mappedCars);
