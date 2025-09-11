@@ -93,11 +93,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
+// Define the frontend Car interface (simplified for rendering)
 interface Car {
   id: string;
   make: string;
   title: string;
+  price: number;
   image: string;
 }
 
@@ -127,6 +130,7 @@ export default function CarListing() {
           _id: string;
           make: string;
           title: string;
+          price: number;
           images: string[];
           status: 'unsold' | 'sold';
         }
@@ -136,6 +140,7 @@ export default function CarListing() {
           id: car._id,
           make: car.make,
           title: car.title,
+          price: car.price || 0,  // Fallback to 0 if missing
           image:
             car.images && car.images.length > 0
               ? car.images[0]  // Use signed S3 URL directly (no baseUrl prefix)
@@ -163,21 +168,34 @@ export default function CarListing() {
       {/* Cars Grid */}
       {!loading && !error && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cars.map((car) => (
-            <div
-              key={car.id}
-              className="text-black rounded-xl shadow hover:shadow-lg transition p-3"
-            >
-              <Image
-                src={car.image}
-                alt={car.title}
-                width={400}
-                height={300}
-                className="rounded-lg object-cover w-full h-48"
-              />
-              <p className="text-center font-bold mt-2 underline">Sold sold sold</p>
-            </div>
-          ))}
+          {cars.length > 0 ? (
+            cars.map((car) => (
+              <Link key={car.id} href={`/CarDetails/${car.id}`}>
+                <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
+                  <Image
+                    src={car.image}
+                    alt={car.title}
+                    width={400}
+                    height={300}
+                    className="rounded-lg object-cover w-full h-48"
+                  />
+                  <h3 className="mt-3 font-semibold text-lg text-center">
+                    {car.title}
+                  </h3>
+                  <p className="text-blue-600 text-center font-bold">
+                    ${car.price.toLocaleString()}
+                  </p>
+                  <p className="text-center font-bold mt-2 underline text-red-600">
+                    SOLD
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="text-center text-gray-600 col-span-full">
+              No sold cars found.
+            </p>
+          )}
         </div>
       )}
     </section>
