@@ -1,71 +1,95 @@
+
 // "use client";
+// import { useState, useEffect } from "react";
 // import Image from "next/image";
 
-// type Car = {
-//   id: number;
+// interface Car {
+//   id: string;
 //   make: string;
 //   title: string;
 //   image: string;
-// };
-
-// const cars: Car[] = [
-//   {
-//     id: 1,
-//     make: "Ford",
-//     title: "1964 Ford Thunderbird 390cu",
-//     image: "/car1.jpg",
-//   },
-//   {
-//     id: 2,
-//     make: "Ferrari",
-//     title: "1974 Ferrari Dino 308 GT4",
-//     image: "/car2.jpg",
-//   },
-//   {
-//     id: 3,
-//     make: "Austin",
-//     title: "1966 Austin Healey MKIII 3000",
-//     image: "/car3.jpg",
-//   },
-//   {
-//     id: 4,
-//     make: "Ford",
-//     title: "2010 Ford Mustang Shelby GT500",
-//     image: "/car4.jpg",
-//   },
-//   {
-//     id: 5,
-//     make: "Holden",
-//     title: "2011 Holden VE HDT SS Group A",
-//     image: "/car5.jpg",
-//   },
-// ];
+// }
 
 // export default function CarListing() {
+//   const [cars, setCars] = useState<Car[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+//   useEffect(() => {
+//     const fetchCars = async () => {
+//       try {
+//         const response = await fetch(`${baseUrl}/cars/sold`, {
+//           method: "GET",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//         });
+
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch cars");
+//         }
+
+//         interface BackendCar {
+//           _id: string;
+//           make: string;
+//           title: string;
+//           images: string[];
+//         }
+
+//         const data: BackendCar[] = await response.json();
+//         const mappedCars: Car[] = data.map((car) => ({
+//           id: car._id,
+//           make: car.make,
+//           title: car.title,
+//           image:
+//             car.images && car.images.length > 0
+//               ? `${baseUrl}${car.images[0]}`
+//               : "/default-car.jpg",
+//         }));
+
+//         setCars(mappedCars);
+//         setLoading(false);
+//       } catch (err) {
+//         setError("Error fetching cars. Please try again later.");
+//         setLoading(false);
+//         console.error(err);
+//       }
+//     };
+
+//     fetchCars();
+//   }, [baseUrl]);
+
 //   return (
 //     <section className="container mx-auto px-4 py-8">
+//       {/* Loading and Error States */}
+//       {loading && <p className="text-center text-gray-600">Loading cars...</p>}
+//       {error && <p className="text-center text-red-600">{error}</p>}
+
 //       {/* Cars Grid */}
-//       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-//         {cars.map((car) => (
-//           <div
-//             key={car.id}
-//             className="text-black rounded-xl shadow hover:shadow-lg transition p-3"
-//           >
-//             <Image
-//               src={car.image}
-//               alt={car.title}
-//               width={400}
-//               height={300}
-//               className="rounded-lg object-cover w-full h-48"
-//             />
-//             <p className=" text-center font-bold mt-2 underline">Sold sold sold </p>
-//           </div>
-//         ))}
-//       </div>
+//       {!loading && !error && (
+//         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+//           {cars.map((car) => (
+//             <div
+//               key={car.id}
+//               className="text-black rounded-xl shadow hover:shadow-lg transition p-3"
+//             >
+//               <Image
+//                 src={car.image}
+//                 alt={car.title}
+//                 width={400}
+//                 height={300}
+//                 className="rounded-lg object-cover w-full h-48"
+//               />
+//               <p className="text-center font-bold mt-2 underline">Sold sold sold</p>
+//             </div>
+//           ))}
+//         </div>
+//       )}
 //     </section>
 //   );
 // }
-
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -98,11 +122,13 @@ export default function CarListing() {
           throw new Error("Failed to fetch cars");
         }
 
+        // Define the backend Car type based on the schema (includes images as signed S3 URLs)
         interface BackendCar {
           _id: string;
           make: string;
           title: string;
           images: string[];
+          status: 'unsold' | 'sold';
         }
 
         const data: BackendCar[] = await response.json();
@@ -112,7 +138,7 @@ export default function CarListing() {
           title: car.title,
           image:
             car.images && car.images.length > 0
-              ? `${baseUrl}${car.images[0]}`
+              ? car.images[0]  // Use signed S3 URL directly (no baseUrl prefix)
               : "/default-car.jpg",
         }));
 

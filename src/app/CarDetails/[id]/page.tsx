@@ -173,7 +173,7 @@ export default function CarDetailPage() {
     <div className="bg-white">
       <Banner
         image={
-          car.images?.[0] ? `${baseUrl}${car.images[0]}` : "/default-car.jpg"
+          car.images?.[0] ? `${car.images[0]}` : "/default-car.jpg"
         }
         title={car.title}
         subtitle={`$${car.price.toLocaleString()}`}
@@ -191,9 +191,9 @@ export default function CarDetailPage() {
         <CarGallery
           phone="0493 717 475"
           videoThumbnail={
-            car.images?.[0] ? `${baseUrl}${car.images[0]}` : "/default-car.jpg"
+            car.images?.[0] ? `${car.images[0]}` : "/default-car.jpg"
           }
-          images={car.images?.map((img: string) => `${baseUrl}${img}`) || []}
+          images={car.images?.map((img: string) => `${img}`) || []}
         />
 
         <EnquiryForm />
