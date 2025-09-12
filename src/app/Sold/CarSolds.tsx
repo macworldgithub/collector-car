@@ -215,8 +215,16 @@ interface Car {
   image: string;
 }
 
-export default function CarListing() {
+// Define the paginated response interface
+interface PaginatedCars {
+  data: Car[];
+  total: number;
+}
+
+export default function FilterCar() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [totalCars, setTotalCars] = useState(0); // New: total count from backend
+  const [selectedMake, setSelectedMake] = useState("Any");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -226,8 +234,11 @@ export default function CarListing() {
 
   useEffect(() => {
     const fetchCars = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await fetch(`${baseUrl}/cars/sold?page=${currentPage}&limit=${carsPerPage}`, {
+        // Fetch paginated data (backend now returns { data, total })
+        const response = await fetch(`${baseUrl}/cars?page=${currentPage}&limit=${carsPerPage}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -247,16 +258,22 @@ export default function CarListing() {
           status: 'unsold' | 'sold';
         }
 
-        const data: BackendCar[] = await response.json();
-        const mappedCars: Car[] = data.map((car) => ({
+        interface BackendResponse {
+          data: BackendCar[];
+          total: number;
+        }
+
+        const backendResponse: BackendResponse = await response.json();
+        const mappedCars: Car[] = backendResponse.data.map((car) => ({
           id: car._id,
           make: car.make,
           title: car.title,
-          price: car.price || 0,
+          price: car.price,
           image: car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg",
         }));
 
         setCars(mappedCars);
+        setTotalCars(backendResponse.total); // New: set total count
         setLoading(false);
       } catch (err) {
         setError("Error fetching cars. Please try again later.");
@@ -266,21 +283,45 @@ export default function CarListing() {
     };
 
     fetchCars();
-  }, [baseUrl, currentPage]);
+  }, [baseUrl, currentPage]); // Note: selectedMake doesn't trigger refetch here (client-side filter)
 
-  const totalPages = Math.ceil(cars.length / carsPerPage);
+  // Client-side filtering (only on current page's data; total remains backend total for unsold)
+  const makes = ["Any", ...new Set(cars.map((car) => car.make))];
+  const filteredCars = selectedMake === "Any" ? cars : cars.filter((car) => car.make === selectedMake);
+  // Use backend total for pagination calc (assumes filter is on unsold cars)
+  const totalPages = Math.ceil(totalCars / carsPerPage);
+  // Note: paginatedCars is now just the filtered current page data (since backend paginates)
+  const paginatedCars = filteredCars; // No need for slice anymore
+
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <section className="container mx-auto px-4 py-8">
+      {/* Uncomment if you want the filter back */}
+      {/* <div className="flex justify-center mb-6 text-black">
+        <div>
+          <label className="block text-center font-semibold mb-2">Filter By Make</label>
+          <select
+            value={selectedMake}
+            onChange={(e) => setSelectedMake(e.target.value)}
+            className="border rounded px-3 py-2"
+            disabled={loading}
+          >
+            {makes.map((make, idx) => (
+              <option key={idx} value={make}>{make}</option>
+            ))}
+          </select>
+        </div>
+      </div> */}
+
       {loading && <p className="text-center text-gray-600">Loading cars...</p>}
       {error && <p className="text-center text-red-600">{error}</p>}
 
       {!loading && !error && (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {cars.length > 0 ? (
-              cars.map((car) => (
+            {paginatedCars.length > 0 ? (
+              paginatedCars.map((car) => (
                 <Link key={car.id} href={`/CarDetails/${car.id}`}>
                   <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
                     <Image
@@ -292,12 +333,11 @@ export default function CarListing() {
                     />
                     <h3 className="mt-3 font-semibold text-lg text-center">{car.title}</h3>
                     <p className="text-blue-600 text-center font-bold">${car.price.toLocaleString()}</p>
-                    <p className="text-center font-bold mt-2 underline text-red-600">SOLD</p>
                   </div>
                 </Link>
               ))
             ) : (
-              <p className="text-center text-gray-600 col-span-full">No sold cars found.</p>
+              <p className="text-center text-gray-600 col-span-full">No cars found for the selected make.</p>
             )}
           </div>
 

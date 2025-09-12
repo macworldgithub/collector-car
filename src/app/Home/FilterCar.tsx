@@ -291,8 +291,15 @@ interface Car {
   image: string;
 }
 
+// Define the paginated response interface
+interface PaginatedCars {
+  data: Car[];
+  total: number;
+}
+
 export default function FilterCar() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [totalCars, setTotalCars] = useState(0); // New: total count from backend
   const [selectedMake, setSelectedMake] = useState("Any");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -303,7 +310,10 @@ export default function FilterCar() {
 
   useEffect(() => {
     const fetchCars = async () => {
+      setLoading(true);
+      setError(null);
       try {
+        // Fetch paginated data (backend now returns { data, total })
         const response = await fetch(`${baseUrl}/cars?page=${currentPage}&limit=${carsPerPage}`, {
           method: "GET",
           headers: {
@@ -324,8 +334,13 @@ export default function FilterCar() {
           status: 'unsold' | 'sold';
         }
 
-        const data: BackendCar[] = await response.json();
-        const mappedCars: Car[] = data.map((car) => ({
+        interface BackendResponse {
+          data: BackendCar[];
+          total: number;
+        }
+
+        const backendResponse: BackendResponse = await response.json();
+        const mappedCars: Car[] = backendResponse.data.map((car) => ({
           id: car._id,
           make: car.make,
           title: car.title,
@@ -334,6 +349,7 @@ export default function FilterCar() {
         }));
 
         setCars(mappedCars);
+        setTotalCars(backendResponse.total); // New: set total count
         setLoading(false);
       } catch (err) {
         setError("Error fetching cars. Please try again later.");
@@ -343,17 +359,21 @@ export default function FilterCar() {
     };
 
     fetchCars();
-  }, [baseUrl, currentPage]);
+  }, [baseUrl, currentPage]); // Note: selectedMake doesn't trigger refetch here (client-side filter)
 
+  // Client-side filtering (only on current page's data; total remains backend total for unsold)
   const makes = ["Any", ...new Set(cars.map((car) => car.make))];
   const filteredCars = selectedMake === "Any" ? cars : cars.filter((car) => car.make === selectedMake);
-  const totalPages = Math.ceil(filteredCars.length / carsPerPage);
-  const paginatedCars = filteredCars.slice((currentPage - 1) * carsPerPage, currentPage * carsPerPage);
+  // Use backend total for pagination calc (assumes filter is on unsold cars)
+  const totalPages = Math.ceil(totalCars / carsPerPage);
+  // Note: paginatedCars is now just the filtered current page data (since backend paginates)
+  const paginatedCars = filteredCars; // No need for slice anymore
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <section className="container mx-auto px-4 py-8">
+      {/* Uncomment if you want the filter back */}
       {/* <div className="flex justify-center mb-6 text-black">
         <div>
           <label className="block text-center font-semibold mb-2">Filter By Make</label>
