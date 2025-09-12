@@ -7,7 +7,7 @@ type BannerProps = {
 
 export default function Banner({ image, title, subtitle }: BannerProps) {
   return (
-    <div className="relative w-full h-[300px] md:h-[500px] flex items-center justify-center">
+    <div className="relative w-full h-[300px] md:h-[500px] flex items-center justify-center ">
       {/* Background Image */}
       <Image
         src={image}
