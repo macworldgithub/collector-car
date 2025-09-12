@@ -217,7 +217,7 @@ export default function FilterCar() {
   return (
     <section className="container mx-auto px-4 py-8">
       {/* Filter Dropdown */}
-      <div className="flex justify-center mb-6 text-black">
+      {/* <div className="flex justify-center mb-6 text-black">
         <div>
           <label className="block text-center font-semibold mb-2">
             Filter By Make
@@ -235,7 +235,7 @@ export default function FilterCar() {
             ))}
           </select>
         </div>
-      </div>
+      </div> */}
 
       {/* Loading and Error States */}
       {loading && <p className="text-center text-gray-600">Loading cars...</p>}
