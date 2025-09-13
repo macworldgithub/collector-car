@@ -201,6 +201,7 @@
 //     </section>
 //   );
 // }
+// CarListing.tsx (complete code with updates for sold cars)
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -221,10 +222,9 @@ interface PaginatedCars {
   total: number;
 }
 
-export default function FilterCar() {
+export default function CarListing() {
   const [cars, setCars] = useState<Car[]>([]);
   const [totalCars, setTotalCars] = useState(0); // New: total count from backend
-  const [selectedMake, setSelectedMake] = useState("Any");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -237,8 +237,7 @@ export default function FilterCar() {
       setLoading(true);
       setError(null);
       try {
-        // Fetch paginated data (backend now returns { data, total })
-        const response = await fetch(`${baseUrl}/cars?page=${currentPage}&limit=${carsPerPage}`, {
+        const response = await fetch(`${baseUrl}/cars/sold?page=${currentPage}&limit=${carsPerPage}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -268,7 +267,7 @@ export default function FilterCar() {
           id: car._id,
           make: car.make,
           title: car.title,
-          price: car.price,
+          price: car.price || 0,
           image: car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg",
         }));
 
@@ -283,45 +282,21 @@ export default function FilterCar() {
     };
 
     fetchCars();
-  }, [baseUrl, currentPage]); // Note: selectedMake doesn't trigger refetch here (client-side filter)
+  }, [baseUrl, currentPage]);
 
-  // Client-side filtering (only on current page's data; total remains backend total for unsold)
-  const makes = ["Any", ...new Set(cars.map((car) => car.make))];
-  const filteredCars = selectedMake === "Any" ? cars : cars.filter((car) => car.make === selectedMake);
-  // Use backend total for pagination calc (assumes filter is on unsold cars)
   const totalPages = Math.ceil(totalCars / carsPerPage);
-  // Note: paginatedCars is now just the filtered current page data (since backend paginates)
-  const paginatedCars = filteredCars; // No need for slice anymore
-
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <section className="container mx-auto px-4 py-8">
-      {/* Uncomment if you want the filter back */}
-      {/* <div className="flex justify-center mb-6 text-black">
-        <div>
-          <label className="block text-center font-semibold mb-2">Filter By Make</label>
-          <select
-            value={selectedMake}
-            onChange={(e) => setSelectedMake(e.target.value)}
-            className="border rounded px-3 py-2"
-            disabled={loading}
-          >
-            {makes.map((make, idx) => (
-              <option key={idx} value={make}>{make}</option>
-            ))}
-          </select>
-        </div>
-      </div> */}
-
       {loading && <p className="text-center text-gray-600">Loading cars...</p>}
       {error && <p className="text-center text-red-600">{error}</p>}
 
       {!loading && !error && (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {paginatedCars.length > 0 ? (
-              paginatedCars.map((car) => (
+            {cars.length > 0 ? (
+              cars.map((car) => (
                 <Link key={car.id} href={`/CarDetails/${car.id}`}>
                   <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
                     <Image
@@ -331,13 +306,13 @@ export default function FilterCar() {
                       height={300}
                       className="rounded-lg object-cover w-full h-48"
                     />
-                    <h3 className="mt-3 font-semibold text-lg text-center">{car.title}</h3>
-                    <p className="text-blue-600 text-center font-bold">${car.price.toLocaleString()}</p>
+                    <p className="text-center font-bold mt-2 tracking-widest">&quot;SOLD SOLD SOLD&quot;</p>
+
                   </div>
                 </Link>
               ))
             ) : (
-              <p className="text-center text-gray-600 col-span-full">No cars found for the selected make.</p>
+              <p className="text-center text-gray-600 col-span-full">No sold cars found.</p>
             )}
           </div>
 
