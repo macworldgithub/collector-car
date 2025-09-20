@@ -299,9 +299,9 @@ export default function FilterCar() {
                     <Image
                       src={car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg"}
                       alt={car.title}
-                      width={400}
+                      width={500}
                       height={300}
-                      className="rounded-lg object-cover w-full h-48"
+                      className="rounded-lg object-contain w-full h-48 bg-white"
                     />
                     <h3 className="mt-3 font-semibold text-lg text-center">{car.title}</h3>
                     <p className="text-blue-600 text-center font-bold">

@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import Banner from "@/components/Banner";
 import CarDetail from "./CarDetail";
 import CarGallery from "@/components/CarGallery";
 import EnquiryForm from "./EnquiryForm";
+
 const page = () => {
+  const galleryRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScrollToGallery = () => {
+    console.log("Banner clicked, attempting to scroll to gallery...");
+    console.log("galleryRef.current:", galleryRef.current);
+    if (galleryRef.current) {
+      galleryRef.current.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.log("Ref is null");
+    }
+  };
   return (
     <div className="bg-white">
       <Banner
         image="/car6.jpg"
         title={`2010 Ford Mustang Shelby Convertible \n GT500 “Supercharged”`}
         subtitle="$109,000.00"
+        onBannerClick={handleScrollToGallery}
       />
       <main>
         <CarDetail
@@ -43,6 +56,8 @@ const page = () => {
         />
 
         <CarGallery
+          ref={galleryRef}
+          id="car-gallery"
           phone="0493 717 475"
           videoThumbnail="/car6.jpg"
           images={[
