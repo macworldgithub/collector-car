@@ -3,10 +3,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import MainMenu from "./MainMenu";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-
+const navigation = useRouter();
   return (
     <>
       <header className="bg-[#13125a] text-white relative z-50">
@@ -20,7 +21,7 @@ export default function Navbar() {
           </button>
 
           {/* Center - Logo */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1 flex justify-center" onClick={() => navigation.push('/')}>
             <Image
               src="/logo.png"
               alt="Collector Car Depot"
