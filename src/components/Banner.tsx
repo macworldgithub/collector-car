@@ -1,3 +1,92 @@
+// import Image from "next/image";
+
+// type BannerProps = {
+//   image?: string;
+//   video?: string;
+//   title: string;
+//   subtitle: string;
+// };
+
+// export default function Banner({ image, video, title, subtitle }: BannerProps) {
+//   return (
+//     <div className="relative w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden">
+//       {/* Background Video */}
+//       {video ? (
+//         <video
+//           src={video}
+//           autoPlay
+//           loop
+//           muted
+//           playsInline
+//           className="absolute inset-0 w-full h-full object-cover brightness-50"
+//         />
+//       ) : (
+//         image && (
+//           <Image
+//             src={image}
+//             alt="Banner Background"
+//             fill
+//             className="object-cover brightness-50"
+//             priority
+//           />
+//         )
+//       )}
+
+//       {/* Overlay Text */}
+//       <div className="relative text-center text-white px-4 z-10">
+//         <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
+//         <p className="text-sm md:text-lg mt-2">{subtitle}</p>
+//       </div>
+//     </div>
+//   );
+// }
+
+// import Image from "next/image";
+
+// type BannerProps = {
+//   image?: string;
+//   video?: string;
+//   title: string;
+//   subtitle: string;
+// };
+
+// export default function Banner({ image, video, title, subtitle }: BannerProps) {
+//   return (
+//     <div className="relative w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden">
+//       {/* Background Video */}
+//       {video ? (
+//         <video
+//           src={video}
+//           autoPlay
+//           loop
+//           muted
+//           playsInline
+//           className="absolute inset-0 w-full h-full object-cover brightness-50"
+//         />
+//       ) : (
+//         image && (
+//           <Image
+//             src={image}
+//             alt="Banner Background"
+//             fill
+//             className="object-cover brightness-50"
+//             priority
+//           />
+//         )
+//       )}
+
+//       {/* Overlay Text */}
+//       <div className="relative text-center text-white px-4 z-10">
+//         <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
+//         {subtitle && (
+//           <p className="text-sm md:text-lg mt-2">{subtitle}</p>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
 import Image from "next/image";
 
 type BannerProps = {
@@ -5,12 +94,16 @@ type BannerProps = {
   video?: string;
   title: string;
   subtitle: string;
-  onBannerClick?: () => void;
+  onClick?: () => void; // Add onClick prop
 };
 
-export default function Banner({ image, video, title, subtitle, onBannerClick }: BannerProps) {
+export default function Banner({ image, video, title, subtitle, onClick }: BannerProps) {
   return (
-    <div className="relative w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden">
+    <div
+      className="relative w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden cursor-pointer"
+      onClick={onClick} // Attach click handler
+    >
+      {/* Background Video */}
       {video ? (
         <video
           src={video}
@@ -22,27 +115,18 @@ export default function Banner({ image, video, title, subtitle, onBannerClick }:
         />
       ) : (
         image && (
-          <button
-            type="button"
-            onClick={() => {
-              console.log("Banner button clicked");
-              onBannerClick?.();
-            }}
-            className="absolute inset-0 w-full h-full cursor-pointer p-0 border-0 bg-transparent z-10"
-            aria-label="Scroll to gallery"
-          >
-            <Image
-              src={image}
-              alt="Banner Background"
-              fill
-              className="object-cover brightness-50"
-              priority
-            />
-          </button>
+          <Image
+            src={image}
+            alt="Banner Background"
+            fill
+            className="object-cover brightness-50"
+            priority
+          />
         )
       )}
 
-      <div className="relative text-center text-white px-4 z-20 pointer-events-none">
+      {/* Overlay Text */}
+      <div className="relative text-center text-white px-4 z-10">
         <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
         {subtitle && (
           <p className="text-sm md:text-lg mt-2">{subtitle}</p>
