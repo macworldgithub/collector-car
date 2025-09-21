@@ -228,7 +228,7 @@ export default function EnquiryForm() {
         message: "",
         contactPreferences: [],
       });
-    } catch (err: any) {
+    } catch  {
       setError("Failed to submit enquiry. Please try again.");
     } finally {
       setLoading(false);
