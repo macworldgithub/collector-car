@@ -1,95 +1,3 @@
-
-// "use client";
-// import { useState, useEffect } from "react";
-// import Image from "next/image";
-
-// interface Car {
-//   id: string;
-//   make: string;
-//   title: string;
-//   image: string;
-// }
-
-// export default function CarListing() {
-//   const [cars, setCars] = useState<Car[]>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState<string | null>(null);
-
-//   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-
-//   useEffect(() => {
-//     const fetchCars = async () => {
-//       try {
-//         const response = await fetch(`${baseUrl}/cars/sold`, {
-//           method: "GET",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         });
-
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch cars");
-//         }
-
-//         interface BackendCar {
-//           _id: string;
-//           make: string;
-//           title: string;
-//           images: string[];
-//         }
-
-//         const data: BackendCar[] = await response.json();
-//         const mappedCars: Car[] = data.map((car) => ({
-//           id: car._id,
-//           make: car.make,
-//           title: car.title,
-//           image:
-//             car.images && car.images.length > 0
-//               ? `${baseUrl}${car.images[0]}`
-//               : "/default-car.jpg",
-//         }));
-
-//         setCars(mappedCars);
-//         setLoading(false);
-//       } catch (err) {
-//         setError("Error fetching cars. Please try again later.");
-//         setLoading(false);
-//         console.error(err);
-//       }
-//     };
-
-//     fetchCars();
-//   }, [baseUrl]);
-
-//   return (
-//     <section className="container mx-auto px-4 py-8">
-//       {/* Loading and Error States */}
-//       {loading && <p className="text-center text-gray-600">Loading cars...</p>}
-//       {error && <p className="text-center text-red-600">{error}</p>}
-
-//       {/* Cars Grid */}
-//       {!loading && !error && (
-//         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-//           {cars.map((car) => (
-//             <div
-//               key={car.id}
-//               className="text-black rounded-xl shadow hover:shadow-lg transition p-3"
-//             >
-//               <Image
-//                 src={car.image}
-//                 alt={car.title}
-//                 width={400}
-//                 height={300}
-//                 className="rounded-lg object-cover w-full h-48"
-//               />
-//               <p className="text-center font-bold mt-2 underline">Sold sold sold</p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </section>
-//   );
-// }
 // "use client";
 // import { useState, useEffect } from "react";
 // import Image from "next/image";
@@ -104,17 +12,28 @@
 //   image: string;
 // }
 
+// // Define the paginated response interface
+// interface PaginatedCars {
+//   data: Car[];
+//   total: number;
+// }
+
 // export default function CarListing() {
 //   const [cars, setCars] = useState<Car[]>([]);
+//   const [totalCars, setTotalCars] = useState(0); // New: total count from backend
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState<string | null>(null);
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const carsPerPage = 9;
 
 //   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 //   useEffect(() => {
 //     const fetchCars = async () => {
+//       setLoading(true);
+//       setError(null);
 //       try {
-//         const response = await fetch(`${baseUrl}/cars/sold`, {
+//         const response = await fetch(`${baseUrl}/cars/sold?page=${currentPage}&limit=${carsPerPage}`, {
 //           method: "GET",
 //           headers: {
 //             "Content-Type": "application/json",
@@ -125,7 +44,6 @@
 //           throw new Error("Failed to fetch cars");
 //         }
 
-//         // Define the backend Car type based on the schema (includes images as signed S3 URLs)
 //         interface BackendCar {
 //           _id: string;
 //           make: string;
@@ -135,19 +53,22 @@
 //           status: 'unsold' | 'sold';
 //         }
 
-//         const data: BackendCar[] = await response.json();
-//         const mappedCars: Car[] = data.map((car) => ({
+//         interface BackendResponse {
+//           data: BackendCar[];
+//           total: number;
+//         }
+
+//         const backendResponse: BackendResponse = await response.json();
+//         const mappedCars: Car[] = backendResponse.data.map((car) => ({
 //           id: car._id,
 //           make: car.make,
 //           title: car.title,
-//           price: car.price || 0,  // Fallback to 0 if missing
-//           image:
-//             car.images && car.images.length > 0
-//               ? car.images[0]  // Use signed S3 URL directly (no baseUrl prefix)
-//               : "/default-car.jpg",
+//           price: car.price || 0,
+//           image: car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg",
 //         }));
 
 //         setCars(mappedCars);
+//         setTotalCars(backendResponse.total); // New: set total count
 //         setLoading(false);
 //       } catch (err) {
 //         setError("Error fetching cars. Please try again later.");
@@ -157,46 +78,68 @@
 //     };
 
 //     fetchCars();
-//   }, [baseUrl]);
+//   }, [baseUrl, currentPage]);
+
+//   const totalPages = Math.ceil(totalCars / carsPerPage);
+//   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
 //   return (
 //     <section className="container mx-auto px-4 py-8">
-//       {/* Loading and Error States */}
 //       {loading && <p className="text-center text-gray-600">Loading cars...</p>}
 //       {error && <p className="text-center text-red-600">{error}</p>}
 
-//       {/* Cars Grid */}
 //       {!loading && !error && (
-//         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-//           {cars.length > 0 ? (
-//             cars.map((car) => (
-//               <Link key={car.id} href={`/CarDetails/${car.id}`}>
-//                 <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
-//                   <Image
-//                     src={car.image}
-//                     alt={car.title}
-//                     width={400}
-//                     height={300}
-//                     className="rounded-lg object-cover w-full h-48"
-//                   />
-//                   <h3 className="mt-3 font-semibold text-lg text-center">
-//                     {car.title}
-//                   </h3>
-//                   <p className="text-blue-600 text-center font-bold">
-//                     ${car.price.toLocaleString()}
-//                   </p>
-//                   <p className="text-center font-bold mt-2 underline text-red-600">
-//                     SOLD
-//                   </p>
-//                 </div>
-//               </Link>
-//             ))
-//           ) : (
-//             <p className="text-center text-gray-600 col-span-full">
-//               No sold cars found.
-//             </p>
+//         <>
+//           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+//             {cars.length > 0 ? (
+//               cars.map((car) => (
+//                 <Link key={car.id} href={`/CarDetails/${car.id}`}>
+//                   <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
+//                     <Image
+//                       src={car.image}
+//                       alt={car.title}
+//                       width={400}
+//                       height={300}
+//                       className="rounded-lg object-cover w-full h-48"
+//                     />
+//                     <p className="text-center font-bold mt-2 tracking-widest">&quot;SOLD SOLD SOLD&quot;</p>
+
+//                   </div>
+//                 </Link>
+//               ))
+//             ) : (
+//               <p className="text-center text-gray-600 col-span-full">No sold cars found.</p>
+//             )}
+//           </div>
+
+//           {totalPages > 1 && (
+//             <div className="flex justify-center mt-6 space-x-2">
+//               <button
+//                 onClick={() => paginate(currentPage - 1)}
+//                 disabled={currentPage === 1}
+//                 className="text-blue-600 hover:underline disabled:text-gray-400"
+//               >
+//                 Previous
+//               </button>
+//               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+//                 <button
+//                   key={page}
+//                   onClick={() => paginate(page)}
+//                   className={`px-2 hover:underline ${currentPage === page ? 'font-bold' : 'text-blue-600'}`}
+//                 >
+//                   {page}
+//                 </button>
+//               ))}
+//               <button
+//                 onClick={() => paginate(currentPage + 1)}
+//                 disabled={currentPage === totalPages}
+//                 className="text-blue-600 hover:underline disabled:text-gray-400"
+//               >
+//                 Next
+//               </button>
+//             </div>
 //           )}
-//         </div>
+//         </>
 //       )}
 //     </section>
 //   );
@@ -206,57 +149,55 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// Define the frontend Car interface (simplified for rendering)
+// Define the frontend Car interface to match backend schema
 interface Car {
-  id: string;
+  _id: string;
+  slug: string;
   make: string;
   title: string;
   price: number;
-  image: string;
+  images: string[];
+  status: 'unsold' | 'sold';
+}
+
+// Define the paginated response interface
+interface PaginatedCars {
+  data: Car[];
+  total: number;
 }
 
 export default function CarListing() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [totalCars, setTotalCars] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const carsPerPage = 9;
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
   useEffect(() => {
     const fetchCars = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await fetch(`${baseUrl}/cars/sold?page=${currentPage}&limit=${carsPerPage}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `${baseUrl}/cars/sold?page=${currentPage}&limit=${carsPerPage}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch cars");
         }
 
-        interface BackendCar {
-          _id: string;
-          make: string;
-          title: string;
-          price: number;
-          images: string[];
-          status: 'unsold' | 'sold';
-        }
-
-        const data: BackendCar[] = await response.json();
-        const mappedCars: Car[] = data.map((car) => ({
-          id: car._id,
-          make: car.make,
-          title: car.title,
-          price: car.price || 0,
-          image: car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg",
-        }));
-
-        setCars(mappedCars);
+        const backendResponse: PaginatedCars = await response.json();
+        setCars(backendResponse.data);
+        setTotalCars(backendResponse.total);
         setLoading(false);
       } catch (err) {
         setError("Error fetching cars. Please try again later.");
@@ -268,7 +209,7 @@ export default function CarListing() {
     fetchCars();
   }, [baseUrl, currentPage]);
 
-  const totalPages = Math.ceil(cars.length / carsPerPage);
+  const totalPages = Math.ceil(totalCars / carsPerPage);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
@@ -281,18 +222,16 @@ export default function CarListing() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cars.length > 0 ? (
               cars.map((car) => (
-                <Link key={car.id} href={`/CarDetails/${car.id}`}>
+                <Link key={car._id} href={`/CarDetails/${car.slug}`}>
                   <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
                     <Image
-                      src={car.image}
+                      src={car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg"}
                       alt={car.title}
                       width={400}
                       height={300}
                       className="rounded-lg object-cover w-full h-48"
                     />
-                    <h3 className="mt-3 font-semibold text-lg text-center">{car.title}</h3>
-                    <p className="text-blue-600 text-center font-bold">${car.price.toLocaleString()}</p>
-                    <p className="text-center font-bold mt-2 underline text-red-600">SOLD</p>
+                    <p className="text-center font-bold mt-2 tracking-widest">&quot;SOLD SOLD SOLD&quot;</p>
                   </div>
                 </Link>
               ))

@@ -8,7 +8,7 @@ const page = () => {
     return (
         <div className='bg-white'>
             <Banner
-                image="/banner4.jpg"
+                image="/IMG_8540-ezgif.com-apng-to-avif-converter-scaled.avif"
                 title="About Us"
                 subtitle={`At Collector Car Depot, we specialize in the best collector\ncar listings across the classic automotive market,\noffering quality cars and delivering complete peace of mind to our clients.`}
             />
