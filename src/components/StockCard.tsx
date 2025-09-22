@@ -5,7 +5,7 @@ export default function StockCard() {
         subtitle:
             "We List Only The Finest, Hand-Selected Sports, Classic And Luxury Cars.",
         buttonText: "View our current stock",
-        image: "/IMG_8551-ezgif.com-apng-to-avif-converter.avif",
+        image: "/123-2000x1790-ezgif.com-apng-to-avif-converter.avif",
     };
 
     return (
