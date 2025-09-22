@@ -65,9 +65,12 @@
 
 // export default CarGallery;
 
+"use client";
 import Image from "next/image";
 import React, { forwardRef } from "react";
-
+import { Lightbox } from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { useState } from "react";
 type CarGalleryProps = {
   phone: string;
   images: string[];
@@ -77,6 +80,13 @@ type CarGalleryProps = {
 // Use forwardRef to allow ref to be passed to the section element
 const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
   ({ phone, images, videoThumbnail }, ref) => {
+    const [open, setOpen] = useState(false);
+    const [index, setIndex] = useState(0);
+
+    const handleImageClick = (idx: number) => {
+      setIndex(idx);
+      setOpen(true);
+    };
     return (
       <section ref={ref} className="px-4 md:px-12 lg:px-20 py-10">
         {/* Enquiry Section */}
@@ -118,7 +128,11 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
         {/* Image Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((src, idx) => (
-            <div key={idx} className="relative w-full aspect-[4/3]">
+            <div
+              key={idx}
+              className="relative w-full aspect-[4/3] cursor-pointer"
+              onClick={() => handleImageClick(idx)}
+            >
               <Image
                 src={src}
                 alt={`Car image ${idx + 1}`}
@@ -128,6 +142,14 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
             </div>
           ))}
         </div>
+
+        <Lightbox
+          open={open}
+          close={() => setOpen(false)}
+          slides={images.map((src) => ({ src }))}
+          index={index}
+          on={{ view: ({ index }) => setIndex(index) }}
+        />
       </section>
     );
   }
