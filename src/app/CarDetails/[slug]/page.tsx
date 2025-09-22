@@ -59,8 +59,8 @@
 //         }
 //         title={car.status === "sold" ? `"SOLD SOLD SOLD"` : car.title}
 //         subtitle={
-//           car.status === "sold" 
-//             ? "" 
+//           car.status === "sold"
+//             ? ""
 //             : `$${car.price.toLocaleString()}`
 //         }
 //       />
@@ -87,8 +87,6 @@
 //     </div>
 //   );
 // }
-
-
 
 // "use client";
 // import { useState, useEffect } from "react";
@@ -173,7 +171,6 @@
 //   );
 // }
 
-
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
@@ -237,11 +234,12 @@ export default function CarDetailPage() {
   return (
     <div className="bg-white">
       <Banner
-        image={car.images?.[0] ? car.images[0] : "/default-car.jpg"}
-        title={car.status === "sold" ? `"SOLD SOLD SOLD"` : car.title}
+        images={car.images?.length ? car.images : ["/default-car.jpg"]}
+        title={car.status === "sold" ? "SOLD SOLD SOLD" : car.title}
         subtitle={car.status === "sold" ? "" : `$${car.price.toLocaleString()}`}
-        onClick={scrollToGallery} // Pass scroll function to Banner
+        onClick={scrollToGallery}
       />
+
       <main>
         <CarDetail
           title={car.title}
