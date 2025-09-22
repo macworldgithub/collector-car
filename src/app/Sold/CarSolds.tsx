@@ -157,7 +157,7 @@ interface Car {
   title: string;
   price: number;
   images: string[];
-  status: 'unsold' | 'sold';
+  status: "unsold" | "sold";
 }
 
 // Define the paginated response interface
@@ -223,20 +223,30 @@ export default function CarListing() {
             {cars.length > 0 ? (
               cars.map((car) => (
                 <Link key={car._id} href={`/CarDetails/${car.slug}`}>
-                  <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3">
-                    <Image
-                      src={car.images && car.images.length > 0 ? car.images[0] : "/default-car.jpg"}
-                      alt={car.title}
-                      width={400}
-                      height={300}
-                      className="rounded-lg object-cover w-full h-48"
-                    />
-                    <p className="text-center font-bold mt-2 tracking-widest">&quot;SOLD SOLD SOLD&quot;</p>
+                  <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3 h-full flex flex-col">
+                    {/* Image Container with fixed aspect ratio */}
+                    <div className="relative w-full aspect-[4/3] bg-white">
+                      <Image
+                        src={
+                          car.images && car.images.length > 0
+                            ? car.images[0]
+                            : "/default-car.jpg"
+                        }
+                        alt={car.title}
+                        fill
+                        className="rounded-lg object-contain"
+                      />
+                    </div>
+                    <p className="text-center font-bold mt-2 tracking-widest">
+                      &quot;SOLD SOLD SOLD&quot;
+                    </p>
                   </div>
                 </Link>
               ))
             ) : (
-              <p className="text-center text-gray-600 col-span-full">No sold cars found.</p>
+              <p className="text-center text-gray-600 col-span-full">
+                No sold cars found.
+              </p>
             )}
           </div>
 
@@ -249,15 +259,19 @@ export default function CarListing() {
               >
                 Previous
               </button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => paginate(page)}
-                  className={`px-2 hover:underline ${currentPage === page ? 'font-bold' : 'text-blue-600'}`}
-                >
-                  {page}
-                </button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => paginate(page)}
+                    className={`px-2 hover:underline ${
+                      currentPage === page ? "font-bold" : "text-blue-600"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                )
+              )}
               <button
                 onClick={() => paginate(currentPage + 1)}
                 disabled={currentPage === totalPages}

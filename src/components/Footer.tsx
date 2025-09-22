@@ -12,9 +12,15 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: <FaFacebookF />, href: "https://facebook.com" },
-    { icon: <FaInstagram />, href: "https://instagram.com" },
-    { icon: <FaWhatsapp />, href: "https://wa.me/123456789" },
+    {
+      icon: <FaFacebookF />,
+      href: "https://www.facebook.com/newcastle.carshowgarage?mibextid=wwXIfr&rdid=4D90aKE6WIszUJ6F&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AAfLB3Qo3%2F%3Fmibextid%3DwwXIfr#",
+    },
+    {
+      icon: <FaInstagram />,
+      href: "https://www.instagram.com/collectorcardepot_official/?igsh=MWVzZXoxZDd0OTVxZA%3D%3D#",
+    },
+    { icon: <FaWhatsapp />, href: "https://wa.me/493717475" },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,16 +80,16 @@ const Footer = () => {
       {/* Footer Bottom Section */}
       <div className="bg-[#0F0F5A] text-white py-10 px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-       {/* Logo */}
-<div className="flex flex-col items-center md:items-start">
-  <Image
-    src="/logo.png"
-    alt="Collector Car Depot"
-    width={112}  
-    height={112} 
-    className="mb-3"
-  />
-</div>
+          {/* Logo */}
+          <div className="flex flex-col items-center md:items-start">
+            <Image
+              src="/logo.png"
+              alt="Collector Car Depot"
+              width={112}
+              height={112}
+              className="mb-3"
+            />
+          </div>
 
           {/* Quick Links */}
           <div>
