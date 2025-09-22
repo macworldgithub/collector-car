@@ -193,6 +193,7 @@ interface Car {
   specifications: { label: string; value: string }[];
   status: "unsold" | "sold";
   images: string[];
+  videos?: string[]; // array of video URLs
   userId?: string;
 }
 
@@ -250,13 +251,18 @@ export default function CarDetailPage() {
           specifications={car.specifications || []}
         />
 
-        <CarGallery
+        {/* <CarGallery
           ref={galleryRef} // Pass ref to CarGallery
           phone="0493 717 475"
           videoThumbnail={car.images?.[0] ? car.images[0] : "/default-car.jpg"}
           images={car.images?.map((img: string) => img) || []}
+        /> */}
+        <CarGallery
+          ref={galleryRef} // Pass ref to CarGallery
+          phone="0493 717 475"
+          videos={car.videos} // or videos={[...]} if static
+          images={car.images}
         />
-
         <EnquiryForm />
       </main>
     </div>

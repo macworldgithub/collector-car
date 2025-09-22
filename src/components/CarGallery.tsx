@@ -74,12 +74,12 @@ import { useState } from "react";
 type CarGalleryProps = {
   phone: string;
   images: string[];
-  videoThumbnail?: string; // optional video preview
+  videos?: string[]; // array of video URLs
 };
 
 // Use forwardRef to allow ref to be passed to the section element
 const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
-  ({ phone, images, videoThumbnail }, ref) => {
+  ({ phone, images, videos = [] }, ref) => {
     const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(0);
 
@@ -98,30 +98,18 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
           </button>
         </div>
 
-        {/* Video Thumbnail (optional) */}
-        {videoThumbnail && (
-          <div className="flex justify-center mb-8">
-            <div className="relative w-full md:w-2/3 lg:w-1/2 aspect-video">
-              <Image
-                src={videoThumbnail}
-                alt="Video Thumbnail"
-                fill
-                className="object-cover rounded-lg"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    className="w-8 h-8 text-blue-600"
-                  >
-                    <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
-                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4z" />
-                  </svg>
-                </div>
+        {/* Videos (if any) */}
+        {videos.length > 0 && (
+          <div className="flex flex-col items-center gap-6 mb-8">
+            {videos.map((videoUrl, idx) => (
+              <div key={idx} className="w-full md:w-2/3 lg:w-1/2 aspect-video">
+                <video
+                  src={videoUrl}
+                  controls
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
-            </div>
+            ))}
           </div>
         )}
 
@@ -148,6 +136,7 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
           close={() => setOpen(false)}
           slides={images.map((src) => ({ src }))}
           index={index}
+          //@ts-ignore
           on={{ view: ({ index }) => setIndex(index) }}
         />
       </section>

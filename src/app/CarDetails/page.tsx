@@ -44,6 +44,7 @@ const page = () => {
 
         <CarGallery
           phone="0493 717 475"
+          //@ts-ignore
           videoThumbnail="/car6.jpg"
           images={[
             "/car6.jpg",
