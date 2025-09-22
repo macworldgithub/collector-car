@@ -7,6 +7,7 @@ const page = () => {
   return (
     <div className="bg-white">
       <Banner
+        //@ts-ignore
         image="/car6.jpg"
         title={`2010 Ford Mustang Shelby Convertible \n GT500 “Supercharged”`}
         subtitle="$109,000.00"

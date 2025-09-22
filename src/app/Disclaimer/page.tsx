@@ -5,6 +5,7 @@ const page = () => {
     return (
         <div className='bg-white'>
             <Banner
+       //@ts-ignore
                 image="/bike2.jpg"
                 title="YouTube Video Disclaimer"
                 subtitle=""
