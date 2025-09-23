@@ -291,11 +291,16 @@ export default function Banner({
       )}
 
       {/* Overlay Text */}
-      <div className="relative text-center text-white px-4 z-10">
+      {/* <div className="relative text-center text-white px-4 z-10">
         <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
         {subtitle && <p className="text-sm md:text-lg mt-2">{subtitle}</p>}
+      </div> */}
+      <div className="relative text-center text-white px-4 z-10">
+        <h1 className="text-2xl md:text-5xl font-bold">{title}</h1>
+        {subtitle && (
+          <p className="text-lg md:text-2xl mt-3">{subtitle}</p>
+        )}
       </div>
-
       {/* Navigation Arrows (only if multiple images) */}
       {imageList.length > 1 && (
         <>
