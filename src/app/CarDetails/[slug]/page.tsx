@@ -249,6 +249,7 @@ export default function CarDetailPage() {
           highlights={car.highlights || []}
           keyFeatures={car.keyFeatures || []}
           specifications={car.specifications || []}
+          youtubeLinks={car.youtubeLinks || []}
         />
 
         {/* <CarGallery
