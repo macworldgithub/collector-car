@@ -291,7 +291,7 @@ export default function Banner({
         <img
           src={currentImage}
           alt={`Banner ${currentIndex + 1}`}
-          className="object-cover brightness-50 transition-all duration-500 w-full h-full"
+          className="absolute inset-0 object-cover brightness-50 transition-all duration-500"
         />
       )}
 
