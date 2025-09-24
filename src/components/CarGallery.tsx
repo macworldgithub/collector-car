@@ -121,11 +121,16 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
               className="relative w-full aspect-[4/3] cursor-pointer"
               onClick={() => handleImageClick(idx)}
             >
-              <Image
+              {/* <Image
                 src={src}
                 alt={`Car image ${idx + 1}`}
                 fill
                 className="object-cover rounded-lg"
+              /> */}
+              <img
+                src={src}
+                alt={`Car image ${idx + 1}`}
+                className="object-cover rounded-lg w-full h-full"
               />
             </div>
           ))}

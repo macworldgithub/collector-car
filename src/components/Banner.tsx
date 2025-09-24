@@ -281,12 +281,17 @@ export default function Banner({
           className="absolute inset-0 w-full h-full object-cover brightness-50"
         />
       ) : (
-        <Image
+        // <Image
+        //   src={currentImage}
+        //   alt={`Banner ${currentIndex + 1}`}
+        //   fill
+        //   className="object-cover brightness-50 transition-all duration-500"
+        //   priority
+        // />
+        <img
           src={currentImage}
           alt={`Banner ${currentIndex + 1}`}
-          fill
-          className="object-cover brightness-50 transition-all duration-500"
-          priority
+          className="object-cover brightness-50 transition-all duration-500 w-full h-full"
         />
       )}
 
@@ -297,9 +302,7 @@ export default function Banner({
       </div> */}
       <div className="relative text-center text-white px-4 z-10">
         <h1 className="text-2xl md:text-5xl font-bold">{title}</h1>
-        {subtitle && (
-          <p className="text-lg md:text-2xl mt-3">{subtitle}</p>
-        )}
+        {subtitle && <p className="text-lg md:text-2xl mt-3">{subtitle}</p>}
       </div>
       {/* Navigation Arrows (only if multiple images) */}
       {imageList.length > 1 && (

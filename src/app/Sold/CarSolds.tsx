@@ -226,7 +226,7 @@ export default function CarListing() {
                   <div className="cursor-pointer text-black rounded-xl shadow hover:shadow-lg transition p-3 h-full flex flex-col">
                     {/* Image Container with fixed aspect ratio */}
                     <div className="relative w-full aspect-[4/3] bg-white">
-                      <Image
+                      {/* <Image
                         src={
                           car.images && car.images.length > 0
                             ? car.images[0]
@@ -235,6 +235,15 @@ export default function CarListing() {
                         alt={car.title}
                         fill
                         className="rounded-lg object-contain"
+                      /> */}
+                      <img
+                        src={
+                          car.images && car.images.length > 0
+                            ? car.images[0]
+                            : "/default-car.jpg"
+                        }
+                        alt={car.title}
+                        className="rounded-lg object-contain w-full h-full"
                       />
                     </div>
                     <p className="text-center font-bold mt-2 tracking-widest">
