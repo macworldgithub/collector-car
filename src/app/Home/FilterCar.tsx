@@ -336,7 +336,7 @@ export default function FilterCar() {
                     <img
                       src={car.images?.[0] ?? "/default-car.jpg"}
                       alt="car.title"
-                      className="rounded-lg object-contain"
+                      className="rounded-lg object-contain w-full h-full"
                     />
                   </div>
 

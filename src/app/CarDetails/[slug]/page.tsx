@@ -194,6 +194,8 @@ interface Car {
   status: "unsold" | "sold";
   images: string[];
   videos?: string[]; // array of video URLs
+  youtubeLinks?: string[];  // ✅ YouTube video URLs
+
   userId?: string;
 }
 
@@ -249,7 +251,6 @@ export default function CarDetailPage() {
           highlights={car.highlights || []}
           keyFeatures={car.keyFeatures || []}
           specifications={car.specifications || []}
-          youtubeLinks={car.youtubeLinks || []}
         />
 
         {/* <CarGallery
@@ -258,12 +259,21 @@ export default function CarDetailPage() {
           videoThumbnail={car.images?.[0] ? car.images[0] : "/default-car.jpg"}
           images={car.images?.map((img: string) => img) || []}
         /> */}
-        <CarGallery
+        {/* <CarGallery
           ref={galleryRef} // Pass ref to CarGallery
           phone="0493 717 475"
           videos={car.videos} // or videos={[...]} if static
           images={car.images}
+        /> */}
+        <CarGallery
+          ref={galleryRef}
+          phone="0493 717 475"
+          youtubeLinks={car.youtubeLinks || []}
+          videos={car.videos || []}
+          images={car.images || []}
         />
+
+
         <EnquiryForm />
       </main>
     </div>
