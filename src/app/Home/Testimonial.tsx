@@ -157,7 +157,7 @@ export default function Testimonials() {
     if (testimonials.length > 0) {
       const interval = setInterval(() => {
         nextSlide();
-      }, 5000); // auto change every 5s
+      }, 12000); // auto change every 5s
       return () => clearInterval(interval);
     }
   }, [testimonials]);
