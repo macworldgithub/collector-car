@@ -172,7 +172,7 @@
 // }
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 
 // Define the frontend Car interface to match backend schema
@@ -219,6 +219,7 @@ export default function FilterCar() {
         }
         const data: string[] = await response.json();
         setMakes(["Any", ...data]);
+        console.log(data, "data");
       } catch (err) {
         console.error("Error fetching makes:", err);
       }
@@ -326,10 +327,15 @@ export default function FilterCar() {
                 <div className="cursor-pointer text-black rounded-xl hover:shadow-lg transition p-3 h-full flex flex-col">
                   {/* Image Container with fixed aspect ratio */}
                   <div className="relative w-full aspect-[4/3] bg-white">
-                    <Image
+                    {/* <Image
                       src={car.images?.[0] ?? "/default-car.jpg"}
                       alt={car.title}
                       fill
+                      className="rounded-lg object-contain"
+                    /> */}
+                    <img
+                      src={car.images?.[0] ?? "/default-car.jpg"}
+                      alt="car.title"
                       className="rounded-lg object-contain"
                     />
                   </div>
