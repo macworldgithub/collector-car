@@ -267,7 +267,7 @@ export default function Banner({
 
   return (
     <div
-      className="relative w-full h-[300px] md:h-[750px] flex items-center justify-center overflow-hidden cursor-pointer"
+      className="relative w-full h-[300px] max-sm:h-[220px] md:h-[750px] flex items-center justify-center overflow-hidden cursor-pointer"
       onClick={onClick}
     >
       {/* Background Video OR Image */}
@@ -300,9 +300,15 @@ export default function Banner({
         <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
         {subtitle && <p className="text-sm md:text-lg mt-2">{subtitle}</p>}
       </div> */}
-      <div className="relative text-center text-white px-4 z-10">
-        <h1 className="text-2xl md:text-5xl font-bold">{title}</h1>
-        {subtitle && <p className="text-lg md:text-2xl mt-3">{subtitle}</p>}
+      <div className="relative text-center text-white px-4 z-10 w-full max-w-[90%]">
+        <h1 className="text-2xl md:text-5xl font-bold max-sm:text-lg">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-lg md:text-2xl mt-3 max-sm:text-sm break-words whitespace-normal overflow-visible leading-relaxed">
+            {subtitle}
+          </p>
+        )}
       </div>
       {/* Navigation Arrows (only if multiple images) */}
       {imageList.length > 1 && (
