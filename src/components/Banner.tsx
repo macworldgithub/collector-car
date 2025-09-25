@@ -305,7 +305,7 @@ export default function Banner({
           {title}
         </h1>
         {subtitle && (
-          <p className="text-lg md:text-2xl mt-3 max-sm:text-sm break-words whitespace-normal overflow-visible leading-relaxed">
+          <p className="text-lg md:text-2xl mt-3 max-sm:text-sm break-words whitespace-normal overflow-visible leading-relaxed font-bold">
             {subtitle}
           </p>
         )}

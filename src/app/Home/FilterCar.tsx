@@ -299,7 +299,7 @@ export default function FilterCar() {
 
       {!loading && !error && (
         <>
-          {/* <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+          {/* {/* <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch"> 
             {cars.map((car) => (
               <Link key={car._id} href={`/CarDetails/${car.slug}`}>
                 <div className="cursor-pointer text-black rounded-xl hover:shadow-lg transition p-3 h-full flex flex-col">
@@ -321,18 +321,12 @@ export default function FilterCar() {
               </Link>
             ))}
           </div> */}
+
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
             {cars.map((car) => (
               <Link key={car._id} href={`/CarDetails/${car.slug}`}>
                 <div className="cursor-pointer text-black rounded-xl hover:shadow-lg transition p-3 h-full flex flex-col">
-                  {/* Image Container with fixed aspect ratio */}
                   <div className="relative w-full aspect-[4/3] bg-white">
-                    {/* <Image
-                      src={car.images?.[0] ?? "/default-car.jpg"}
-                      alt={car.title}
-                      fill
-                      className="rounded-lg object-contain"
-                    /> */}
                     <img
                       src={car.images?.[0] ?? "/default-car.jpg"}
                       alt="car.title"
@@ -345,7 +339,7 @@ export default function FilterCar() {
                     {car.title}
                   </h3>
 
-                  {/* Price (pushed to bottom) */}
+                  {/* Price (pushed to bottom)  */}
                   <p className="text-blue-600 text-center font-bold mt-auto">
                     ${car.price.toLocaleString()}
                   </p>
