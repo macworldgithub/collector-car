@@ -236,7 +236,7 @@ export default function CarListing() {
                         fill
                         className="rounded-lg object-contain"
                       /> */}
-                      <img
+                      {/* <img
                         src={
                           car.images && car.images.length > 0
                             ? car.images[0]
@@ -244,7 +244,16 @@ export default function CarListing() {
                         }
                         alt={car.title}
                         className="rounded-lg object-contain w-full h-full"
-                      />
+                      /> */}
+                      <img
+                      src={
+                        car.images && car.images.length > 0
+                          ? car.images[0]
+                          : "/default-car.jpg"
+                      }
+                      alt={car.title}
+                      className="absolute inset-0 w-full h-full rounded-lg object-contain"
+                    />
                     </div>
                     <p className="text-center font-bold mt-2 tracking-widest">
                       &quot;SOLD SOLD SOLD&quot;
