@@ -195,9 +195,17 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
         <div className="text-center mb-10">
           <p className="text-sm md:text-base">Interested in this vehicle ?</p>
           <p className="font-semibold text-gray-800 mb-3">Call us on {phone}</p>
-          <button className="px-6 py-2 bg-gray-900 text-white rounded hover:bg-gray-700 transition">
-            Enquire
-          </button>
+          <button
+  onClick={() => {
+    const formSection = document.getElementById("enquiry-form");
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+  className="px-6 py-2 bg-gray-900 text-white rounded hover:bg-gray-700 transition"
+>
+  Enquire
+</button>
         </div>
 
         {/* YouTube Videos */}
