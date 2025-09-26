@@ -43,7 +43,7 @@ export default function Services() {
             key={i}
             className="relative w-80 h-64 rounded-lg overflow-hidden shadow-md items-center justify-center "
           >
-            <Image src={img} alt={`car-${i}`} fill className="object-cover" />
+            <Image src={img} alt={`car-${i}`} unoptimized fill className="object-cover" />
           </div>
         ))}
       </div>
