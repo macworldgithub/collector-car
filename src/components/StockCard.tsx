@@ -20,6 +20,7 @@ export default function StockCard() {
                         alt={stockData.title}
                         width={800}
                         height={600}
+                        unoptimized
                         className="w-full h-120 object-cover rounded-lg"
                         priority
                     />
