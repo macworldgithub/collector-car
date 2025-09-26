@@ -1,11 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+
 export default function StockCard() {
     const stockData = {
         title: "Current Stock",
         subtitle:
             "We List Only The Finest, Hand-Selected Sports, Classic And Luxury Cars.",
         buttonText: "View our current stock",
-        image: "/123-2000x1790-ezgif.com-apng-to-avif-converter.avif",
+        image: "/stock-card.jpg",
     };
 
     return (
@@ -32,9 +34,12 @@ export default function StockCard() {
                         </div>
 
                         {/* Button bilkul neeche */}
-                        <button className="bg-white text-black font-semibold px-4 py-2 rounded shadow hover:bg-gray-200 transition">
-                            {stockData.buttonText}
-                        </button>
+                        <Link
+                        href="/"
+                        className="bg-white text-black font-semibold px-4 py-2 rounded shadow hover:bg-gray-200 transition"
+                        >
+                        {stockData.buttonText}
+                        </Link>
                     </div>
 
                 </div>
