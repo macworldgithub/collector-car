@@ -104,13 +104,18 @@ export default function Navbar() {
           </div>
 
           {/* Right - Contact Info (Desktop / Tablet) */}
-          <div className="text-right leading-tight hidden md:block">
-            <a href="tel:+61493717475" className="text-lg font-bold block">
-              0493 717 475
-            </a>
-            <p className="text-base font-semibold">Monday to Friday</p>
-            <p className="text-base font-semibold">9am to 5pm</p>
-          </div>
+          {/* Right - Contact Info (Desktop / Tablet) */}
+<div className="hidden md:block text-center">
+  <a
+    href="tel:+61493717475"
+    className="block text-xl font-extrabold tracking-wide"
+  >
+    0493 717 475
+  </a>
+  <p className="block text-base font-bold">Monday to Friday</p>
+  <p className="block text-base font-bold">9am to 5pm</p>
+</div>
+
 
           {/* Right - Phone Icon (Mobile Only) */}
           <div className="md:hidden flex items-center">
