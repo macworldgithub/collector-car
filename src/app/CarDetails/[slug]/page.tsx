@@ -305,7 +305,6 @@ export async function generateMetadata(
 ) {
   const { slug } = await props.params; // ✅ Await params
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-  const baseDomain = "https://collectorcardepot.com";
 
   try {
     const res = await fetch(`${baseUrl}/cars/${slug}`, { cache: "no-store" });
@@ -313,26 +312,15 @@ export async function generateMetadata(
 
     const car: Car = await res.json();
 
-    // ✅ Ensure absolute, non-expiring image URL
-    let image = car.images?.length ? car.images[0] : "/default-car.jpg";
-    if (!image.startsWith("http")) {
-      image = `${baseDomain}${image}`;
-    } else if (image.includes("?X-Amz-")) {
-      // strip query params from S3 presigned URLs
-      image = image.split("?")[0];
-    }
-
+    const image = car.images?.length ? car.images[0] : "/default-car.jpg";
     const title = car.status === "sold" ? `SOLD – ${car.title}` : car.title;
-
-    // ✅ log image on server console
-    console.log("🚗 Car main image:", image);
 
     return {
       title,
       openGraph: {
         title,
         type: "article",
-        url: `${baseDomain}/CarDetails/${slug}`,
+        url: `https://collectorcardepot.com/CarDetails/${slug}`,
         images: [
           {
             url: image,
@@ -359,4 +347,3 @@ export async function generateMetadata(
 export default function CarDetailPage() {
   return <CarDetailClient />;
 }
-
