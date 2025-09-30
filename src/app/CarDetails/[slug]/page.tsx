@@ -171,15 +171,124 @@
 //   );
 // }
 
+// "use client";
+// import { useState, useEffect, useRef } from "react";
+// import { useParams } from "next/navigation";
+// import Banner from "@/components/Banner";
+// import CarDetail from "../CarDetail";
+// import CarGallery from "@/components/CarGallery";
+// import EnquiryForm from "../EnquiryForm";
+
+// // Define the Car interface to match backend schema
+// interface Car {
+//   _id: string;
+//   slug: string;
+//   title: string;
+//   make: string;
+//   description: string;
+//   price: number;
+//   factoryOptions: string[];
+//   highlights: string[];
+//   keyFeatures: { label: string; value: string }[];
+//   specifications: { label: string; value: string }[];
+//   status: "unsold" | "sold";
+//   images: string[];
+//   videos?: string[]; // array of video URLs
+//   youtubeLinks?: string[];  // ✅ YouTube video URLs
+
+//   userId?: string;
+// }
+
+// export default function CarDetailPage() {
+//   const { slug } = useParams(); // Use slug instead of id
+//   const [car, setCar] = useState<Car | null>(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+//   const galleryRef = useRef<HTMLElement>(null); // Ref for CarGallery section
+
+//   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+//   useEffect(() => {
+//     if (!slug) return;
+//     const fetchCar = async () => {
+//       try {
+//         const res = await fetch(`${baseUrl}/cars/${slug}`);
+//         if (!res.ok) throw new Error("Failed to fetch car details");
+//         const data: Car = await res.json();
+//         setCar(data);
+//       } catch {
+//         setError("Error fetching car details. Please try again later.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchCar();
+//   }, [slug, baseUrl]);
+
+//   // Function to scroll to gallery
+//   const scrollToGallery = () => {
+//     galleryRef.current?.scrollIntoView({ behavior: "smooth" });
+//   };
+
+//   if (loading) return <p className="text-center">Loading car details...</p>;
+//   if (error) return <p className="text-center text-red-600">{error}</p>;
+//   if (!car) return <p className="text-center">Car not found.</p>;
+
+//   return (
+//     <div className="bg-white">
+//       <Banner
+//         images={car.images?.length ? car.images : ["/default-car.jpg"]}
+//         title={car.status === "sold" ? "SOLD SOLD SOLD" : car.title}
+//         subtitle={car.status === "sold" ? "" : `$${car.price.toLocaleString()}`}
+//         onClick={scrollToGallery}
+//       />
+
+//       <main>
+//         <CarDetail
+//           title={car.title}
+//           description={car.description}
+//           factoryOptions={car.factoryOptions || []}
+//           highlights={car.highlights || []}
+//           keyFeatures={car.keyFeatures || []}
+//           specifications={car.specifications || []}
+//         />
+
+//         {/* <CarGallery
+//           ref={galleryRef} // Pass ref to CarGallery
+//           phone="0493 717 475"
+//           videoThumbnail={car.images?.[0] ? car.images[0] : "/default-car.jpg"}
+//           images={car.images?.map((img: string) => img) || []}
+//         /> */}
+//         {/* <CarGallery
+//           ref={galleryRef} // Pass ref to CarGallery
+//           phone="0493 717 475"
+//           videos={car.videos} // or videos={[...]} if static
+//           images={car.images}
+//         /> */}
+//         <CarGallery
+//           ref={galleryRef}
+//           phone="0493 717 475"
+//           youtubeLinks={car.youtubeLinks || []}
+//           videos={car.videos || []}
+//           images={car.images || []}
+//         />
+
+
+//         <EnquiryForm />
+//       </main>
+//     </div>
+//   );
+// }
+
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
+import Head from "next/head";  // ✅ import Head
 import Banner from "@/components/Banner";
 import CarDetail from "../CarDetail";
 import CarGallery from "@/components/CarGallery";
 import EnquiryForm from "../EnquiryForm";
 
-// Define the Car interface to match backend schema
 interface Car {
   _id: string;
   slug: string;
@@ -193,20 +302,20 @@ interface Car {
   specifications: { label: string; value: string }[];
   status: "unsold" | "sold";
   images: string[];
-  videos?: string[]; // array of video URLs
-  youtubeLinks?: string[];  // ✅ YouTube video URLs
-
+  videos?: string[];
+  youtubeLinks?: string[];
   userId?: string;
 }
 
 export default function CarDetailPage() {
-  const { slug } = useParams(); // Use slug instead of id
+  const { slug } = useParams();
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const galleryRef = useRef<HTMLElement>(null); // Ref for CarGallery section
+  const galleryRef = useRef<HTMLElement>(null);
 
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const siteUrl = "https://collectorcardepot.com"; // ✅ Your site domain
 
   useEffect(() => {
     if (!slug) return;
@@ -225,7 +334,6 @@ export default function CarDetailPage() {
     fetchCar();
   }, [slug, baseUrl]);
 
-  // Function to scroll to gallery
   const scrollToGallery = () => {
     galleryRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -234,48 +342,59 @@ export default function CarDetailPage() {
   if (error) return <p className="text-center text-red-600">{error}</p>;
   if (!car) return <p className="text-center">Car not found.</p>;
 
+  const thumbnailImage =
+    car.images?.length > 0 ? car.images[0] : `${siteUrl}/default-car.jpg`;
+
   return (
-    <div className="bg-white">
-      <Banner
-        images={car.images?.length ? car.images : ["/default-car.jpg"]}
-        title={car.status === "sold" ? "SOLD SOLD SOLD" : car.title}
-        subtitle={car.status === "sold" ? "" : `$${car.price.toLocaleString()}`}
-        onClick={scrollToGallery}
-      />
+    <>
+      {/* ✅ Dynamic Open Graph meta tags */}
+      <Head>
+        <title>{car.title} | Collector Car Depot</title>
+        <meta name="description" content={car.description.slice(0, 150)} />
 
-      <main>
-        <CarDetail
-          title={car.title}
-          description={car.description}
-          factoryOptions={car.factoryOptions || []}
-          highlights={car.highlights || []}
-          keyFeatures={car.keyFeatures || []}
-          specifications={car.specifications || []}
+        {/* Open Graph tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${siteUrl}/CarDetails/${car.slug}`} />
+        <meta property="og:title" content={car.title} />
+        <meta property="og:description" content={car.description.slice(0, 150)} />
+        <meta property="og:image" content={thumbnailImage} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={car.title} />
+        <meta name="twitter:description" content={car.description.slice(0, 150)} />
+        <meta name="twitter:image" content={thumbnailImage} />
+      </Head>
+
+      <div className="bg-white">
+        <Banner
+          images={car.images?.length ? car.images : ["/default-car.jpg"]}
+          title={car.status === "sold" ? "SOLD SOLD SOLD" : car.title}
+          subtitle={car.status === "sold" ? "" : `$${car.price.toLocaleString()}`}
+          onClick={scrollToGallery}
         />
 
-        {/* <CarGallery
-          ref={galleryRef} // Pass ref to CarGallery
-          phone="0493 717 475"
-          videoThumbnail={car.images?.[0] ? car.images[0] : "/default-car.jpg"}
-          images={car.images?.map((img: string) => img) || []}
-        /> */}
-        {/* <CarGallery
-          ref={galleryRef} // Pass ref to CarGallery
-          phone="0493 717 475"
-          videos={car.videos} // or videos={[...]} if static
-          images={car.images}
-        /> */}
-        <CarGallery
-          ref={galleryRef}
-          phone="0493 717 475"
-          youtubeLinks={car.youtubeLinks || []}
-          videos={car.videos || []}
-          images={car.images || []}
-        />
+        <main>
+          <CarDetail
+            title={car.title}
+            description={car.description}
+            factoryOptions={car.factoryOptions || []}
+            highlights={car.highlights || []}
+            keyFeatures={car.keyFeatures || []}
+            specifications={car.specifications || []}
+          />
 
+          <CarGallery
+            ref={galleryRef}
+            phone="0493 717 475"
+            youtubeLinks={car.youtubeLinks || []}
+            videos={car.videos || []}
+            images={car.images || []}
+          />
 
-        <EnquiryForm />
-      </main>
-    </div>
+          <EnquiryForm />
+        </main>
+      </div>
+    </>
   );
 }
