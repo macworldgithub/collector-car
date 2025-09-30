@@ -283,12 +283,13 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
-import Head from "next/head";  // ✅ import Head
+import { Metadata } from "next";
 import Banner from "@/components/Banner";
 import CarDetail from "../CarDetail";
 import CarGallery from "@/components/CarGallery";
 import EnquiryForm from "../EnquiryForm";
 
+// Define the Car interface to match backend schema
 interface Car {
   _id: string;
   slug: string;
@@ -301,10 +302,65 @@ interface Car {
   keyFeatures: { label: string; value: string }[];
   specifications: { label: string; value: string }[];
   status: "unsold" | "sold";
-  images: string[];
+  images: string[]; // Complete signed S3 URLs
   videos?: string[];
   youtubeLinks?: string[];
   userId?: string;
+}
+
+// Define metadata generation function
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  try {
+    const res = await fetch(`${baseUrl}/cars/${params.slug}`);
+    if (!res.ok) throw new Error("Failed to fetch car details");
+    const car: Car = await res.json();
+
+    // Use the first signed S3 URL directly
+    const firstImage = car.images?.[0] || "/default-car.jpg"; // Fallback to default image
+
+    return {
+      title: car.title,
+      description: car.description.slice(0, 160), // Truncate for meta
+      openGraph: {
+        title: car.title,
+        description: car.description.slice(0, 160),
+        images: [
+          {
+            url: firstImage, // Signed S3 URL
+            width: 1200,
+            height: 630,
+            alt: car.title,
+          },
+        ],
+        url: `https://collectorcardepot.com/CarDetails/${params.slug}`,
+        type: "website",
+      },
+    };
+  } catch {
+    return {
+      title: "Car Not Found",
+      description: "Unable to load car details.",
+      openGraph: {
+        title: "Car Not Found",
+        description: "Unable to load car details.",
+        images: [
+          {
+            url: `${baseUrl}/default-car.jpg`, // Fallback image
+            width: 1200,
+            height: 630,
+            alt: "Default Car Image",
+          },
+        ],
+        url: `https://collectorcardepot.com/CarDetails/${params.slug}`,
+        type: "website",
+      },
+    };
+  }
 }
 
 export default function CarDetailPage() {
@@ -315,7 +371,6 @@ export default function CarDetailPage() {
   const galleryRef = useRef<HTMLElement>(null);
 
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-  const siteUrl = "https://collectorcardepot.com"; // ✅ Your site domain
 
   useEffect(() => {
     if (!slug) return;
@@ -342,59 +397,35 @@ export default function CarDetailPage() {
   if (error) return <p className="text-center text-red-600">{error}</p>;
   if (!car) return <p className="text-center">Car not found.</p>;
 
-  const thumbnailImage =
-    car.images?.length > 0 ? car.images[0] : `${siteUrl}/default-car.jpg`;
-
   return (
-    <>
-      {/* ✅ Dynamic Open Graph meta tags */}
-      <Head>
-        <title>{car.title} | Collector Car Depot</title>
-        <meta name="description" content={car.description.slice(0, 150)} />
+    <div className="bg-white">
+      <Banner
+        images={car.images?.length ? car.images : ["/default-car.jpg"]}
+        title={car.status === "sold" ? "SOLD SOLD SOLD" : car.title}
+        subtitle={car.status === "sold" ? "" : `$${car.price.toLocaleString()}`}
+        onClick={scrollToGallery}
+      />
 
-        {/* Open Graph tags */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${siteUrl}/CarDetails/${car.slug}`} />
-        <meta property="og:title" content={car.title} />
-        <meta property="og:description" content={car.description.slice(0, 150)} />
-        <meta property="og:image" content={thumbnailImage} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={car.title} />
-        <meta name="twitter:description" content={car.description.slice(0, 150)} />
-        <meta name="twitter:image" content={thumbnailImage} />
-      </Head>
-
-      <div className="bg-white">
-        <Banner
-          images={car.images?.length ? car.images : ["/default-car.jpg"]}
-          title={car.status === "sold" ? "SOLD SOLD SOLD" : car.title}
-          subtitle={car.status === "sold" ? "" : `$${car.price.toLocaleString()}`}
-          onClick={scrollToGallery}
+      <main>
+        <CarDetail
+          title={car.title}
+          description={car.description}
+          factoryOptions={car.factoryOptions || []}
+          highlights={car.highlights || []}
+          keyFeatures={car.keyFeatures || []}
+          specifications={car.specifications || []}
         />
 
-        <main>
-          <CarDetail
-            title={car.title}
-            description={car.description}
-            factoryOptions={car.factoryOptions || []}
-            highlights={car.highlights || []}
-            keyFeatures={car.keyFeatures || []}
-            specifications={car.specifications || []}
-          />
+        <CarGallery
+          ref={galleryRef}
+          phone="0493 717 475"
+          youtubeLinks={car.youtubeLinks || []}
+          videos={car.videos || []}
+          images={car.images || []}
+        />
 
-          <CarGallery
-            ref={galleryRef}
-            phone="0493 717 475"
-            youtubeLinks={car.youtubeLinks || []}
-            videos={car.videos || []}
-            images={car.images || []}
-          />
-
-          <EnquiryForm />
-        </main>
-      </div>
-    </>
+        <EnquiryForm />
+      </main>
+    </div>
   );
 }
