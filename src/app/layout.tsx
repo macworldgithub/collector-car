@@ -16,12 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Collector Car Depot",
   description: "Welcome to Collector Car Depot",
-  icons: {
-    icon: "/logo.png",        // default icon (used by many browsers)
-    shortcut: "/favicon.ico", // for pinned shortcuts / quickbar (optional)
-    apple: "/logo.png"        // iOS / Safari touch icon (optional)
-  },
-};
+}; 
   
 export default function RootLayout({
   children,
