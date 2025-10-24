@@ -279,71 +279,71 @@
 //     </div>
 //   );
 // }
-import CarDetailClient from "./CarDetailClient";
+  import CarDetailClient from "./CarDetailClient";
 
-interface Car {
-  _id: string;
-  slug: string;
-  title: string;
-  make: string;
-  description: string;
-  price: number;
-  factoryOptions: string[];
-  highlights: string[];
-  keyFeatures: { label: string; value: string }[];
-  specifications: { label: string; value: string }[];
-  status: "unsold" | "sold";
-  images: string[];
-  videos?: string[];
-  youtubeLinks?: string[];
-  userId?: string;
-}
-
-// ✅ Server-side metadata generator
-export async function generateMetadata(
-  props: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await props.params; // ✅ Await params
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-
-  try {
-    const res = await fetch(`${baseUrl}/cars/${slug}`, { cache: "no-store" });
-    if (!res.ok) throw new Error("Car not found");
-
-    const car: Car = await res.json();
-
-    const image = car.images?.length ? car.images[0] : "/default-car.jpg";
-    const title = car.status === "sold" ? `SOLD – ${car.title}` : car.title;
-
-    return {
-      title,
-      openGraph: {
-        title,
-        type: "article",
-        url: `https://collectorcardepot.com/CarDetails/${slug}`,
-        images: [
-          {
-            url: image,
-            width: 1200,
-            height: 630,
-            alt: title,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        images: [image],
-      },
-    };
-  } catch {
-    return {
-      title: "Car not found",
-    };
+  interface Car {
+    _id: string;
+    slug: string;
+    title: string;
+    make: string;
+    description: string;
+    price: number;
+    factoryOptions: string[];
+    highlights: string[];
+    keyFeatures: { label: string; value: string }[];
+    specifications: { label: string; value: string }[];
+    status: "unsold" | "sold";
+    images: string[];
+    videos?: string[];
+    youtubeLinks?: string[];
+    userId?: string;
   }
-}
 
-// ✅ Server component wrapping your client component
-export default function CarDetailPage() {
-  return <CarDetailClient />;
-}
+  // ✅ Server-side metadata generator
+  export async function generateMetadata(
+    props: { params: Promise<{ slug: string }> }
+  ) {
+    const { slug } = await props.params; // ✅ Await params
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+    try {
+      const res = await fetch(`${baseUrl}/cars/${slug}`, { cache: "no-store" });
+      if (!res.ok) throw new Error("Car not found");
+
+      const car: Car = await res.json();
+
+      const image = car.images?.length ? car.images[0] : "/default-car.jpg";
+      const title = car.status === "sold" ? `SOLD – ${car.title}` : car.title;
+
+      return {
+        title,
+        openGraph: {
+          title,
+          type: "article",
+          url: `https://collectorcardepot.com/CarDetails/${slug}`,
+          images: [
+            {
+              url: image,
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ],
+        },
+        twitter: {
+          card: "summary_large_image",
+          title,
+          images: [image],
+        },
+      };
+    } catch {
+      return {
+        title: "Car not found",
+      };
+    }
+  }
+
+  // ✅ Server component wrapping your client component
+  export default function CarDetailPage() {
+    return <CarDetailClient />;
+  }

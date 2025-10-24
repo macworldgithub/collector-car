@@ -23,6 +23,12 @@ interface Car {
   videos?: string[];
   youtubeLinks?: string[];
   userId?: string;
+
+  // 🆕 Add this field
+  imageKeys?: {
+    key: string;
+    orientation: "portrait" | "landscape";
+  }[];
 }
 
 export default function CarDetailClient() {
@@ -32,8 +38,7 @@ export default function CarDetailClient() {
   const [error, setError] = useState<string | null>(null);
   const galleryRef = useRef<HTMLElement>(null);
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
   useEffect(() => {
     if (!slug) return;
@@ -79,12 +84,21 @@ export default function CarDetailClient() {
           specifications={car.specifications || []}
         />
 
+        {/* <CarGallery
+          ref={galleryRef}
+          phone="0493 717 475"
+          youtubeLinks={car.youtubeLinks || []}
+          videos={car.videos || []}
+          // images={car.images || []}
+          imageKeys={car.imageKeys || []}
+        /> */}
         <CarGallery
           ref={galleryRef}
           phone="0493 717 475"
           youtubeLinks={car.youtubeLinks || []}
           videos={car.videos || []}
-          images={car.images || []}
+          images={car.images || []} // ✅ add this line
+          imageKeys={car.imageKeys || []}
         />
 
         <EnquiryForm />
