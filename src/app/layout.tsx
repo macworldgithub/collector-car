@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 //   title: "Collector Car Depot",
 //   description: "Welcome to Collector Car Depot",
 // }; 
-  export const metadata: Metadata = {
+ export const metadata: Metadata = {
   title: "Collector Car Depot",
   description: "Welcome to Collector Car Depot",
   openGraph: {
@@ -25,9 +25,10 @@ const geistMono = Geist_Mono({
     description: "Welcome to Collector Car Depot",
     type: "website",
     url: "https://collectorcardepot.com",
+    siteName: "Collector Car Depot",
     images: [
       {
-        url: "/stock-card.jpg",
+        url: "/stock-card.jpg", // your preview image
         width: 1200,
         height: 630,
         alt: "Collector Car Depot Preview Image",
@@ -40,7 +41,11 @@ const geistMono = Geist_Mono({
     description: "Welcome to Collector Car Depot",
     images: ["/stock-card.jpg"],
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
+
 
 export default function RootLayout({
   children,
