@@ -47,7 +47,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 /* ========================================
-   GLOBAL METADATA
+   GLOBAL METADATA + FALLBACK OG IMAGE
    ======================================== */
 export const metadata: Metadata = {
   metadataBase: new URL("https://collectorcardepot.com"),
@@ -56,29 +56,23 @@ export const metadata: Metadata = {
     template: "%s | Collector Car Depot",
   },
   description: "Welcome to Collector Car Depot",
-};
 
-/* ========================================
-   FALLBACK OG IMAGE FOR PAGES WITHOUT THEIR OWN
-   ======================================== */
-export async function generateMetadata() {
-  return {
-    openGraph: {
-      images: [
-        {
-          url: "/stock-card.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Collector Car Depot",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: ["/stock-card.jpg"],
-    },
-  };
-}
+  // Fallback for pages that don't define their own
+  openGraph: {
+    images: [
+      {
+        url: "/stock-card.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Collector Car Depot",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/stock-card.jpg"],
+  },
+};
 
 /* ======================================== */
 export default function RootLayout({

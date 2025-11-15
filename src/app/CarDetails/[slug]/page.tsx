@@ -370,7 +370,7 @@ interface Car {
 }
 
 /* ========================================
-   DYNAMIC METADATA – car image wins
+   DYNAMIC METADATA – OVERRIDES LAYOUT
    ======================================== */
 export async function generateMetadata(
   props: { params: Promise<{ slug: string }> }
@@ -383,9 +383,8 @@ export async function generateMetadata(
     if (!res.ok) throw new Error("Car not found");
     const car: Car = await res.json();
 
-    const firstImage = car.images?.[0];
-    const imageUrl = firstImage
-      ? new URL(firstImage, "https://collectorcardepot.com").href
+    const imageUrl = car.images?.[0]
+      ? new URL(car.images[0], "https://collectorcardepot.com").href
       : "https://collectorcardepot.com/stock-card.jpg";
 
     const title = car.status === "sold" ? `SOLD – ${car.title}` : car.title;
@@ -415,18 +414,11 @@ export async function generateMetadata(
         images: [imageUrl],
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Car Not Found | Collector Car Depot",
-      description: "The requested car could not be found.",
       openGraph: {
-        images: [
-          {
-            url: "https://collectorcardepot.com/stock-card.jpg",
-            width: 1200,
-            height: 630,
-          },
-        ],
+        images: [{ url: "https://collectorcardepot.com/stock-card.jpg" }],
       },
       twitter: {
         images: ["https://collectorcardepot.com/stock-card.jpg"],
