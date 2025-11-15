@@ -349,7 +349,6 @@
   // }
 
   // src/app/CarDetails/[slug]/page.tsx
-// src/app/CarDetails/[slug]/page.tsx
 import CarDetailClient from "./CarDetailClient";
 
 interface Car {
@@ -368,15 +367,11 @@ interface Car {
   videos?: string[];
   youtubeLinks?: string[];
   userId?: string;
-  imageKeys?: {
-    key: string;
-    orientation: "portrait" | "landscape";
-  }[];
 }
 
-/* -------------------------------------------------
-   OLD-STYLE METADATA (1200×630, first image only)
-   ------------------------------------------------- */
+/* ========================================
+   DYNAMIC METADATA – OVERRIDES LAYOUT
+   ======================================== */
 export async function generateMetadata(
   props: { params: Promise<{ slug: string }> }
 ) {
@@ -388,20 +383,24 @@ export async function generateMetadata(
     if (!res.ok) throw new Error("Car not found");
     const car: Car = await res.json();
 
-    // ---- old pattern: first image or fallback ----
-    const image = car.images?.[0] ?? "https://collectorcardepot.com/stock-card.jpg";
+    const imageUrl = car.images?.[0]
+      ? new URL(car.images[0], "https://collectorcardepot.com").href
+      : "https://collectorcardepot.com/stock-card.jpg";
 
     const title = car.status === "sold" ? `SOLD – ${car.title}` : car.title;
+    const description = (car.description || "").slice(0, 160);
 
     return {
       title,
+      description,
       openGraph: {
         title,
+        description,
         type: "article",
         url: `https://collectorcardepot.com/CarDetails/${slug}`,
         images: [
           {
-            url: image,
+            url: imageUrl,
             width: 1200,
             height: 630,
             alt: title,
@@ -411,21 +410,15 @@ export async function generateMetadata(
       twitter: {
         card: "summary_large_image",
         title,
-        images: [image],
+        description,
+        images: [imageUrl],
       },
     };
   } catch {
-    // fallback when fetch fails
     return {
-      title: "Car not found",
+      title: "Car Not Found | Collector Car Depot",
       openGraph: {
-        images: [
-          {
-            url: "https://collectorcardepot.com/stock-card.jpg",
-            width: 1200,
-            height: 630,
-          },
-        ],
+        images: [{ url: "https://collectorcardepot.com/stock-card.jpg" }],
       },
       twitter: {
         images: ["https://collectorcardepot.com/stock-card.jpg"],
@@ -434,7 +427,7 @@ export async function generateMetadata(
   }
 }
 
-/* ------------------------------------------------- */
+/* ======================================== */
 export default function CarDetailPage() {
   return <CarDetailClient />;
 }
