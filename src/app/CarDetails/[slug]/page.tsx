@@ -388,14 +388,14 @@ export async function generateMetadata(
       : "https://collectorcardepot.com/stock-card.jpg";
 
     const title = car.status === "sold" ? `SOLD – ${car.title}` : car.title;
-    const description = (car.description || "").slice(0, 160);
+    // const description = (car.description || "").slice(0, 160);
 
     return {
       title,
-      description,
+      // description,
       openGraph: {
         title,
-        description,
+        // description,
         type: "article",
         url: `https://collectorcardepot.com/CarDetails/${slug}`,
         images: [
@@ -410,7 +410,7 @@ export async function generateMetadata(
       twitter: {
         card: "summary_large_image",
         title,
-        description,
+        // description,
         images: [imageUrl],
       },
     };
