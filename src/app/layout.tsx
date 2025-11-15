@@ -13,11 +13,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+// export const metadata: Metadata = {
+//   title: "Collector Car Depot",
+//   description: "Welcome to Collector Car Depot",
+// }; 
+  export const metadata: Metadata = {
   title: "Collector Car Depot",
   description: "Welcome to Collector Car Depot",
-}; 
-  
+  openGraph: {
+    title: "Collector Car Depot",
+    description: "Welcome to Collector Car Depot",
+    type: "website",
+    url: "https://collectorcardepot.com",
+    images: [
+      {
+        url: "/stock-card.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Collector Car Depot Preview Image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Collector Car Depot",
+    description: "Welcome to Collector Car Depot",
+    images: ["/stock-card.jpg"],
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
