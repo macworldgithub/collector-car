@@ -20,7 +20,7 @@
 
 import React from "react";
 import Banner from "@/components/Banner";
-import ClassicCarAdvice from "@/app/ExpertAdvice/CarAdvice";
+import ClassicCarAdvice from "@/app/Terms-Conditions/CarAdvice";
 import StockCard from "@/components/StockCard";
 
 const Page = () => {

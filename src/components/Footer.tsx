@@ -6,7 +6,7 @@ const Footer = () => {
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "" });
 
   const quickLinks = [
-    { name: "Terms", href: "/Terms" },
+    { name: "Terms & Conditions", href: "/Terms-Conditions" },
     { name: "Privacy Notice", href: "/Privacy" },
     { name: "Youtube Video Disclaimer", href: "/Disclaimer" },
   ];

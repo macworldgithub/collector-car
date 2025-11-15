@@ -146,7 +146,7 @@ const footerLinks = {
     { name: "Collectables", href: "/collectables" },
     { name: "About Us", href: "/About" },
     { name: "Our Services", href: "/OurServices" },
-    { name: "Terms & Conditions", href: "/ExpertAdvice" },
+    { name: "Terms & Conditions", href: "/Terms-Conditions" },
   ],
   previouslySold: [
     { name: "Sold", href: "/Sold" },
