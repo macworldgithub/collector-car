@@ -5,7 +5,8 @@ const privacyPolicy = [
     heading: "1. Introduction",
     content: [
       "We at Collector Car Depot are dedicated to safeguarding your privacy and ensuring your personal information is handled securely. This privacy notice explains how we collect, use, and process your personal data.",
-      "In compliance with data protection laws, Collector Car Depot – office address: 1/68 Dilkera Ave Valentine NSW 2280 acts as the “data controller” responsible for managing your personal data.",
+      // "In compliance with data protection laws, Collector Car Depot – office address: 1/68 Dilkera Ave Valentine NSW 2280 acts as the “data controller” responsible for managing your personal data.",
+      "In compliance with data protection laws, Collector Car Depot acts as the “data controller” responsible for managing your personal data.",
       "Please review this privacy notice alongside any other privacy or data-related notices we may provide when collecting or processing your data, ensuring you understand how and why your information is used. This document complements other notices and does not replace them.",
     ],
   },
