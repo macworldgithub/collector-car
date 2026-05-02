@@ -3,15 +3,17 @@ import Image from "next/image";
 
 export default function Services() {
   const topContent = [
-    "At Collector Car Depot, we specialize in the best collector car listings across the classic automotive market, offering quality cars and delivering complete peace of mind to our clients.",
-    "**Quality experience is our cornerstone** — whether it’s the sale or purchase of your vehicle of choice, every car or bike in our inventory represents what heartland motor enthusiasts expect across a full range of price brackets.",
-    "Our commitment extends beyond providing a diverse inventory. We guide all clients through a complex market often fraught with scams and pitfalls.",
-    "With expert knowledge and professional insight, we help avoid costly problems, ensuring a smooth, rewarding experience. Whether you’re considering an iconic Aussie legend or American classic, possibly a beautifully restored British or Euro classic, our valued advice ensures a prospective purchase meets your standards and delivers the expected satisfaction such a meaningful investment deserves.",
+    "At Collector Car Depot, we serve as the premier marketing service provider and facilitator for the classic automotive market. Our platform connects heartland motor enthusiasts with high-quality listings, ensuring that every vehicle—from iconic Aussie legends to Euro classics—gets the visibility it deserves.",
+    "**Quality experience is our cornerstone**. We don't just list cars; we provide insights and knowledge needed to navigate a complex market often fraught with scams and pitfalls. By acting as a specialized bridge between parties, we help buyers and sellers avoid costly mistakes, ensuring a smooth and rewarding process for all involved.",
+    "Our commitment is to transparency and empowerment across all price brackets. Whether you are looking to showcase your vehicle to a national audience or researching your next meaningful investment, our role as a facilitator ensures you have the tools and advice necessary to meet your standards.",
   ];
 
   const bottomContent = [
-    "With over 30 years of solid hard earned experience right across the Classic car industry, Michael Saide the proprietor of CCD has forged an unparalleled reputation for getting the individual results each Client requires.",
-    "With your trust in his unbiased advice, you will get an unwavering commitment to quality in every transaction.",
+    "**How We Facilitate Your Success:**",
+    "**Strategic Marketing:** We advertise your vehicle's profile using targeted industry reach to find the right audience.",
+    "**Market Navigation:** We provide the professional insight required to bypass common industry pitfalls.",
+    "**A Diverse Platform:** From American classics to British gems, we facilitate connections across a full range of automotive categories.",
+    "**Confidence & Clarity:** While we are not brokers or agents, our valued advice helps ensure your prospective transaction is grounded in factual information and peace of mind.",
   ];
 
   const carImages = [

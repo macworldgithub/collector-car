@@ -2,61 +2,52 @@
 
 export default function ServicesPage() {
   return (
-    <div className="bg-white  flex justify-center px-4 py-12">
+    <div className="bg-white flex justify-center px-4 py-12">
       <div className="max-w-4xl text-gray-800 leading-relaxed">
         <p className="mb-4">
-          At Collector Car Depot, we are always searching for outstanding
-          vehicles that meet our high standards.
+          At Collector Car Depot, we are always on the lookout for classic vehicles that meet our standards for quality and character. We understand that selling a classic can be a time-consuming and often stressful process; that's why we've positioned ourselves as a premier marketing service provider and facilitator to simplify the journey for you.
         </p>
 
         <p className="mb-4">
-          We fully understand that selling a car can be a challenging,
-          time-consuming, and sometimes a stressful process.
+          Collector Car Depot stands apart from traditional providers. We provide the expertise and digital resources to connect your vehicle with the right buyers in a seamless, hassle-free manner. By facilitating clear communication and swift interactions between both parties, we help sellers maximize their vehicle's visibility and value with efficiency.
         </p>
 
-        <p className="mb-4">
-          Collector Car Depot stands apart from most other Classic Car
-          businesses; we have the expertise and resources to make selling your
-          car to the right buyers seamless, and hassle-free. Our commitment to
-          quality decisions and swift transactions between the 2 parties ensures
-          that customers can maximise the value of their vehicles in the
-          shortest time possible.
-        </p>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-8">Our Facilitation Services</h2>
 
-        <p className="mb-4 font-semibold">Our services include:</p>
+        <div className="space-y-6">
+          <div className="border-l-4 border-blue-600 pl-4">
+            <h3 className="font-bold text-lg mb-2">Marketing & Promotion</h3>
+            <p className="mb-4">
+              We offer tailored marketing agreements designed to showcase your vehicle to a qualified audience. We handle every listing with care, utilizing both public platforms and discreet networking to find the ideal match for your car.
+            </p>
+          </div>
 
-        <ul className="list-disc list-inside space-y-6">
-          <li>
-            <span className="font-bold">Brokering</span> – For all vehicles, we
-            offer a tailored Brokerage agreement that provides a clear incentive
-            to secure the best possible price for our clients. We handle all
-            Brokerage agreements with the utmost care, sometimes opting to sell
-            discreetly as well as through our public website & social media
-            platforms.
-            <br />
-            <span className="font-bold">Please Note</span> – Collector Car Depot
-            does not Buy, Own or display vehicles on any land parcel or address,
-            the Inventory listed on this website. Each vehicle is Brokered only
-            and still owned and kept by the persons selling the vehicles until
-            sold.
-            <br />
-            Our service is a complete Start to finish seller & buyer service to
-            help get it done.
-          </li>
+          <div className="border-l-4 border-blue-600 pl-4">
+            <h3 className="font-bold text-lg mb-2">Digital Presence & Social Media</h3>
+            <p className="mb-4">
+              Featured vehicles leverage our extensive reach across Facebook, Instagram, and YouTube, as well as our curated eBay Classifieds presence.
+            </p>
+          </div>
 
-          <li>
-            <span className="font-bold">
-              Website & Social Media Advertising
-            </span>{" "}
-            – Our Brokered vehicles are included on our regular Collector Car
-            Depot social media page posts to leverage the best possible amount
-            of traffic for your sale potential. This includes Multiple Facebook
-            groups, YouTube, Instagram and our eBay Classifieds page … plus our
-            ability to communicate with buyers over WhatsApp to complete
-            photograph sharing and also live video sharing to bring potential
-            buyers closer to the vehicles on offer for a more informed decision.
-          </li>
-        </ul>
+          <div className="border-l-4 border-blue-600 pl-4">
+            <h3 className="font-bold text-lg mb-2">Active Inquiry Management</h3>
+            <p className="mb-4">
+              We bring potential buyers closer to the finish line by facilitating the exchange of high-resolution photos and live video tours via WhatsApp, the use of a Third party Inspection by potential buyers if requested ensuring all parties can make an informed decision with confidence.
+            </p>
+          </div>
+        </div>
+
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 mt-8">Important Information</h2>
+
+        <div className="bg-gray-50 p-4 rounded-lg space-y-3">
+          <p className="font-semibold">Collector Car Depot is a Marketing Facilitator, not a broker or agent.</p>
+          
+          <div className="space-y-2">
+            <p><strong>Ownership:</strong> Collector Car Depot does not buy, own, or store vehicles.</p>
+            <p><strong>Direct Transactions:</strong> All vehicles listed on this website remains the property of the private seller. Each vehicle is kept by the owner until the transaction is finalized directly between the buyer and the seller.</p>
+            <p><strong>End-to-End Support:</strong> Our service provides a complete start-to-finish marketing and communication framework to help you "get it done" without the traditional hurdles of the private market.</p>
+          </div>
+        </div>
       </div>
     </div>
   );

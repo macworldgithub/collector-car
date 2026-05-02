@@ -24,16 +24,7 @@ export default function StockCard() {
                         className="w-full h-120 object-cover rounded-lg"
                         priority
                     />
-                    <div className="absolute inset-0 flex flex-col justify-between items-center text-center px-4 py-6">
-                        <div>
-                            <h2 className="text-white text-xl md:text-2xl font-bold drop-shadow-lg">
-                                {stockData.title}
-                            </h2>
-                            <p className="text-white text-sm md:text-base font-medium mt-1 drop-shadow-lg">
-                                {stockData.subtitle}
-                            </p>
-                        </div>
-
+                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center px-4 py-6">
                         {/* Button bilkul neeche */}
                         <Link
                         href="/"

@@ -10,18 +10,37 @@ export default function AboutPage() {
   const sections: Section[] = [
     {
       content: [
-        "Collector Car Depot has 30 plus years of Passion, knowledge and experience invested in the classic car market.",
-        "CCD’s expertise in sourcing exceptional cars or bikes from around the country assures you of the best choices possible, ensuring an exceptional selection for those seeking investment-grade classic cars or vehicles for your car club and regular outings.",
-        "All vehicles available at Collector Car Depot are owned by the sellers, CCD ensure the quality control is the best possible and smooth path to a transaction.",
-        "There are listings for a broad sector of the Classic Car buyers market to meet all areas of affordability.",
-        "If you have a car to sell, feel free to contact us to discuss the steps to a listing.",
+        "At Collector Car Depot (CCD), we bring over 30 years of passion, knowledge, and experience to the classic automotive landscape. As a dedicated marketing service provider and facilitator, we bridge the gap between private sellers and discerning enthusiasts, ensuring a transparent and professional environment for the classic car community.",
       ],
     },
     {
-      title: "Help & Advice",
+      title: "A Curated Marketplace",
       content: [
-        "We take pride in offering expert guidance to anyone looking to understand the classic car market and make informed purchasing decisions.",
-        "Feel free to call us and discuss any questions you may have about the market.",
+        "While CCD is not a broker or agent, our expertise in sourcing and vetting listings from across the country allows us to present a wide selection of vehicles. Whether you are seeking an investment-grade vehicle or a reliable classic for club outings, our platform connects you directly with all options.",
+        "**Seller-Owned Inventory:** All vehicles featured through our service are owned by their respective sellers.",
+        "**Quality Facilitation:** We act as a conduit, providing the framework for a smooth, direct path to a successful transaction.",
+        "**Market Diversity:** Our listings span the entire classic car sector, offering options that meet various levels of affordability without compromising on character.",
+      ],
+    },
+    {
+      title: "Marketing Your Classic",
+      content: [
+        "If you have a car to sell, our marketing services are designed to put your vehicle in front of the right audience. Contact us today to discuss how our facilitation steps can streamline your listing process and maximize your reach.",
+      ],
+    },
+    {
+      title: "Help & Expert Advice",
+      content: [
+        "We take immense pride in offering professional guidance to help you navigate the complexities of the classic car market. Our role is to empower you with the information needed to make confident, informed decisions.",
+      ],
+    },
+    {
+      title: "Contact Information",
+      content: [
+        "**Michael Saide - Proprietor**",
+        "**Collector Car Depot**",
+        "**Mob - 0493 717 475**",
+        "**www.collectorcardepot.com.au**",
       ],
     },
   ];
