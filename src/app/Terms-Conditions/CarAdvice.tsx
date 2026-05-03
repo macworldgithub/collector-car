@@ -72,34 +72,42 @@ export default function ClassicCarAdvice() {
         {/* Agent Disclosure */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold">
-            Agent Disclosure and Buyer Due Diligence
+            1. Strategic Marketing & Role of Collector Car Depot
           </h2>
           <p className="leading-relaxed">
-            <strong>Collector Car Depot (ABN 84 492 738 231)</strong> operates
-            exclusively as a <strong>Broker Agent (Seller's Agent)</strong>{" "}
-            specialising in the marketing and facilitation of sales for
-            Collector, Classic, Muscle, and Performance Vehicles.
+            <strong>Collector Car Depot (ABN 84 492 738 231) </strong>
+            specializes in high-impact advertising and lead generation for
+            classic, muscle, and performance vehicles. We act as a bridge
+            between private sellers and qualified enthusiasts worldwide.{" "}
           </p>
         </div>
 
         {/* 1. Agency Status and Ownership */}
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">
+          {/* <h3 className="text-lg font-semibold">
             1. Agency Status and Ownership
-          </h3>
+          </h3> */}
+
+          <p className="leading-relaxed">
+            <strong>
+              Collector Car Depot operates as a marketing service provider and
+              facilitator. * No Ownership:{" "}
+            </strong>
+            We do not purchase, own, or maintain an inventory of vehicles. We
+            are not a second-hand vehicle trader.
+          </p>
+
           <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
             <li>
-              Collector Car Depot does not own, purchase, or maintain inventory
-              of any listed vehicles. We are not a second-hand vehicle trader.
+              <strong> Direct Possession:</strong> All vehicles remain in the
+              exclusive custody and care of the Seller until a sale is finalized
+              and funds are cleared.
             </li>
             <li>
-              The vehicles remain in the custody of their respective owners
-              (Sellers) until a confirmed sale is finalised.
-            </li>
-            <li>
-              When you purchase a vehicle through us, your purchase{" "}
-              <strong>Bill Of Sale reciept</strong> is directly with the
-              vehicle’s owner (the Seller).
+              <strong> Service Scope: </strong>Our role is limited to
+              professional advertising, identifying potential buyers, and
+              facilitating communication. We are not a party to the final
+              contract of sale.
             </li>
           </ul>
         </div>
@@ -111,15 +119,19 @@ export default function ClassicCarAdvice() {
           </h3>
           <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
             <li>
-              Vehicle details and descriptions are provided in good faith,
-              relying solely on information supplied by the Seller.
+              <strong>Sales: </strong>All transactions are conducted on an
+              "as-is, where is" basis.
             </li>
             <li>
-              Collector Car Depot does not guarantee or warrant the accuracy of
-              this information or the vehicle’s condition.
+              <strong>Information Accuracy: </strong> Vehicle descriptions are
+              provided in good faith based solely on information supplied by the
+              Seller. Collector Car Depot does not verify, warrant, or guarantee
+              the accuracy of seller claims, the mechanical condition of
+              vehicles, or the legal validity of titles.
             </li>
             <li>
-              All sales are made on an <strong>"as is, where is" basis</strong>.
+              <strong>Independent Risk: </strong>
+              All transactions occur at the sole risk of the buyer and seller.
             </li>
           </ul>
         </div>
@@ -128,31 +140,84 @@ export default function ClassicCarAdvice() {
         <div className="space-y-3">
           <h3 className="text-lg font-semibold">3. Buyer Due Diligence</h3>
           <p className="font-medium">
-            ALL PROSPECTIVE BUYERS ARE STRONGLY ENCOURAGED to conduct thorough
-            due diligence prior to purchase.
+            <strong>
+              ALL PROSPECTIVE BUYERS ARE STRONGLY ENCOURAGED to conduct thorough
+              due diligence prior to purchase.
+            </strong>
           </p>
           <p>This includes:</p>
           <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
             <li>
-              <strong>In-Person Inspection:</strong> Arranging a personal
-              inspection of the vehicle in person.
+              <strong> In-Person Inspection:</strong> Arranging a physical
+              inspection of the vehicle.
             </li>
             <li>
-              <strong>Professional Consultation:</strong> Consulting with a
-              registered vehicle repairer or independent inspector to verify the
-              vehicle's details and condition.
+              <strong>Professional Consultation:</strong> Engaging an
+              independent mechanic or registered vehicle inspector to verify
+              condition and details.
             </li>
             <li>
-              <strong>Virtual Inspection:</strong> Utilising our detailed
-              website photographs and, upon arrangement, we can conduct a live
-              video connection (via WhatsApp, FaceTime, Facebook Messenger, or
-              Zoom) to view the car up close.
+              <strong>Virtual Inspection:</strong> Utilizing our detailed
+              photography or requesting a live video connection (e.g., WhatsApp,
+              FaceTime, Zoom) to view the vehicle remotely.
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold">
+            4. Facilitation and Privacy{" "}
+          </h3>
+          <p className="font-medium">
+            To ensure the legitimacy of the marketplace, Collector Car Depot may
+            request a potential buyer’s driver’s license, email address, and
+            phone number before connecting them with a Seller.
+          </p>
+
+          <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
+            <li>
+              <strong> Data Handling:</strong>If a buyer chooses not to proceed
+              after an inspection, their personal details are deleted from our
+              active records.
+            </li>
+
+            <li>
+              <strong>Direct Communication: </strong> Once vetted, the Seller
+              and Buyer are encouraged to communicate directly to discuss the
+              vehicle.
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold">
+            5. Financial Facilitation & Reciept of Sale
+          </h3>
+          <p className="font-medium">If a price is agreed upon:</p>
+
+          <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
+            <li>
+              <strong> Documentation: </strong> Collector Car Depot assists the
+              Seller in preparing a formal Reciept of Sale, which documents the
+              vehicle status and encumbrance declarations. The final purchase
+              receipt is a contract directly between the Buyer and the Seller.
+            </li>
+            <li>
+              <strong> Fund Management:</strong> Collector Car Depot can provide
+              management of a vehicle deposit to secure the Vehicle. Payment is
+              then made to the Owner/Seller directly of the final full amount.
+            </li>
+            <li>
+              <strong>Fees:</strong> Collector Car Depot receives a fee from the
+              Seller as per the Marketing Service Provider Facilitator
+              Agreement.{" "}
+              <strong>There is no buyer’s premium charged to the Buyer.</strong>
             </li>
           </ul>
         </div>
 
         {/* === STYLISH DISCLOSURE BOX === */}
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8 rounded-xl border border-gray-300 shadow-sm">
+        {/* <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8 rounded-xl border border-gray-300 shadow-sm">
           <p className="text-sm md:text-base leading-relaxed font-medium italic text-gray-800">
             This disclosure ensures all users understand that{" "}
             <span className="font-bold text-black">
@@ -161,10 +226,10 @@ export default function ClassicCarAdvice() {
             and does not take possession or ownership of the vehicles listed on
             this site.
           </p>
-        </div>
+        </div> */}
 
         {/* Inspection & Buyer Verification */}
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <p className="text-sm md:text-base leading-relaxed">
             If a Buyer wishes to speak to the owner or inspect a vehicle listed
             for sale on the Collector Car Depot web site, Collector Car Depot
@@ -193,10 +258,10 @@ export default function ClassicCarAdvice() {
             the transaction are sent via the most appropriate means possible to
             ensure safety of that information.
           </p>
-        </div>
+        </div> */}
 
         {/* Payment Process */}
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <p className="text-sm md:text-base leading-relaxed">
             Once Collector Car Depot receives a{" "}
             <strong>deposit of funds</strong> into its{" "}
@@ -214,33 +279,44 @@ export default function ClassicCarAdvice() {
             There is{" "}
             <strong>no fee or Buyer’s premium charged to the Buyer</strong>.
           </p>
-        </div>
+        </div> */}
 
         {/* Website Availability */}
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Website Availability</h3>
+          <h3 className="text-lg font-semibold">
+            6. Website Availability & Liability{" "}
+          </h3>
           <p className="text-sm md:text-base leading-relaxed">
-            We cannot promise that this website will be uninterrupted, free of
-            error, bugs or viruses and we will not be liable if, for any reason,
-            this website is unavailable at any time or for any computer virus or
-            system failure. Access may be suspended at any time without prior
-            notice being given.
+            We do not guarantee that this website will be uninterrupted or free
+            of errors, bugs, or viruses. Collector Car Depot is not liable for
+            any system failures, computer viruses, or periods of unavailability.
+            Access may be suspended at any time without notice.
           </p>
         </div>
 
         {/* Copyright */}
         <div className="space-y-3 border-t pt-6">
-          <h3 className="text-lg font-semibold">Copyright</h3>
+          <h3 className="text-lg font-semibold">
+            7. Copyright & Intellectual Property{" "}
+          </h3>
           <p className="text-sm md:text-base leading-relaxed">
-            Copyright 2024 Collector Car Depot. All rights reserved.
+            <strong>
+              Copyright 2024 Collector Car Depot. All rights reserved.
+            </strong>{" "}
+            The logo, text, images, and media representing Collector Car Depot
+            are protected by intellectual property laws. This site may also
+            contain third-party copyrighted material (e.g., from manufacturers
+            or owners). No part of this website may be copied, reproduced, or
+            distributed for commercial purposes without express written
+            permission from Collector Car Depot.
           </p>
-          <p className="text-sm md:text-base leading-relaxed">
+          {/* <p className="text-sm md:text-base leading-relaxed">
             The logo and all text, images, graphics, sound files, animation
             files, and video files specifically representing Collector Car Depot
             or its agents, are all subject to Copyright and other intellectual
             property protection.
-          </p>
-          <p className="text-sm md:text-base leading-relaxed">
+          </p> */}
+          {/* <p className="text-sm md:text-base leading-relaxed">
             Collector Car Depot sites may also contain images subject to
             third-party copyright, including those from car owners; vehicle
             manufacturers for example. No person may copy, modify, reproduce,
@@ -248,7 +324,7 @@ export default function ClassicCarAdvice() {
             works from any material, on any part of this website, or otherwise
             use it for commercial or public purposes without the express written
             permission of Collector Car Depot.
-          </p>
+          </p> */}
         </div>
       </div>
     </section>

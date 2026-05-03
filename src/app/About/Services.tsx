@@ -16,11 +16,10 @@ export default function Services() {
     "**Confidence & Clarity:** While we are not brokers or agents, our valued advice helps ensure your prospective transaction is grounded in factual information and peace of mind.",
   ];
 
-  const carImages = [
-    "/car1.jpg",
-    "/car2.jpg",
-    "/car3.jpg", 
-  ];
+  const heading = bottomContent[0];
+  const bullets = bottomContent.slice(1);
+
+  const carImages = ["/car1.jpg", "/car2.jpg", "/car3.jpg"];
 
   return (
     <div className="w-full bg-white py-12 px-6 md:px-20 flex flex-col gap-12">
@@ -45,21 +44,46 @@ export default function Services() {
             key={i}
             className="relative w-80 h-64 rounded-lg overflow-hidden shadow-md items-center justify-center "
           >
-            <Image src={img} alt={`car-${i}`} unoptimized fill className="object-cover" />
+            <Image
+              src={img}
+              alt={`car-${i}`}
+              unoptimized
+              fill
+              className="object-cover"
+            />
           </div>
         ))}
       </div>
 
       {/* Bottom Content */}
       <div className="max-w-5xl mx-auto text-center md:text-left space-y-4">
-        {bottomContent.map((para, i) => (
+        {/* {bottomContent.map((para, i) => (
           <p
             key={i}
             className="text-gray-800 text-sm md:text-base leading-relaxed"
           >
             {para}
           </p>
-        ))}
+        ))} */}
+
+        {/* Heading */}
+        <p className="text-gray-900 font-semibold text-base md:text-lg">
+          {heading.replace(/\*\*/g, "")}
+        </p>
+
+        {/* Bullet Points */}
+        <ul className="list-disc pl-6 space-y-2 text-gray-800 text-sm md:text-base leading-relaxed">
+          {bullets.map((item, i) => {
+            const clean = item.replace(/\*\*/g, "");
+            const [title, desc] = clean.split(":");
+
+            return (
+              <li key={i}>
+                <strong>{title}:</strong> {desc}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
