@@ -8,7 +8,7 @@ const page = () => {
       <Banner
         image="/our-service.avif"
         title="Our Services"
-        subtitle="Collector Car Depot has 30 plus years of Passion, knowledge and experience in the classic car market."
+        // subtitle="Collector Car Depot has 30 plus years of Passion, knowledge and experience in the classic car market."
       />
       <AboutPage />
       <StockCard />

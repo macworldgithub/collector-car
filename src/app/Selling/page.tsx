@@ -9,7 +9,7 @@ const page = () => {
       <Banner
         image="/selling-car.avif"
         title="Selling your Car"
-        subtitle="At Collector Car Depot we are always looking for new additions to our listings, to meet the expectations of potential buyers."
+        // subtitle="At Collector Car Depot we are always looking for new additions to our listings, to meet the expectations of potential buyers."
       />
       <ServicesPage />
       <SellingForm />

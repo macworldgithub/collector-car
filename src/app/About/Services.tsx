@@ -3,17 +3,17 @@ import Image from "next/image";
 
 export default function Services() {
   const topContent = [
-    "At Collector Car Depot, we serve as the premier marketing service provider and facilitator for the classic automotive market. Our platform connects heartland motor enthusiasts with high-quality listings, ensuring that every vehicle—from iconic Aussie legends to Euro classics—gets the visibility it deserves.",
-    "**Quality experience is our cornerstone**. We don't just list cars; we provide insights and knowledge needed to navigate a complex market often fraught with scams and pitfalls. By acting as a specialized bridge between parties, we help buyers and sellers avoid costly mistakes, ensuring a smooth and rewarding process for all involved.",
-    "Our commitment is to transparency and empowerment across all price brackets. Whether you are looking to showcase your vehicle to a national audience or researching your next meaningful investment, our role as a facilitator ensures you have the tools and advice necessary to meet your standards.",
+    "At Collector Car Depot, we serve as a Marketing Service Provider and Facilitator for the classic car automotive market. Our platform connects heartland motor enthusiasts with Classic vehicle listings, ensuring that every vehicle—from iconic Aussie legends to Euro classics—gets the visibility it deserves.",
+    "**We don't just list cars; we provide insights and knowledge needed to navigate a complex market often fraught with online scams and pitfalls. By acting as a specialized bridge between parties, we help buyers and sellers achieve an outcome, ensuring a smooth process for all involved.",
+    "Our commitment is to deliver listings across all price brackets. Whether you are looking to showcase your vehicle to a national audience or researching your next purchase, our role as a facilitator ensures you have the tools necessary to meet your needs.",
   ];
 
   const bottomContent = [
     "**How We Facilitate Your Success:**",
     "**Strategic Marketing:** We advertise your vehicle's profile using targeted industry reach to find the right audience.",
-    "**Market Navigation:** We provide the professional insight required to bypass common industry pitfalls.",
-    "**A Diverse Platform:** From American classics to British gems, we facilitate connections across a full range of automotive categories.",
-    "**Confidence & Clarity:** While we are not brokers or agents, our valued advice helps ensure your prospective transaction is grounded in factual information and peace of mind.",
+    "**Market Navigation:** We provide the  insight required to bypass common industry pitfalls.",
+    "**A Diverse Platform:**  From Australian Classics to American & European gems, we facilitate connections across a full range of automotive categories.",
+    "**Confidence & Clarity:** While we are not brokers or agents, our valued advice helps ensure your prospective transaction is grounded with transparency directly with the owners of the Vehicles. ",
   ];
 
   const heading = bottomContent[0];
@@ -29,7 +29,7 @@ export default function Services() {
           <p
             key={i}
             className={`text-gray-800 text-sm md:text-base leading-relaxed ${
-              para.startsWith("**") ? "font-semibold" : ""
+              para.startsWith("**") ? "font-medium" : ""
             }`}
           >
             {para.replace(/\*\*/g, "")}
