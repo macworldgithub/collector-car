@@ -42,7 +42,7 @@ export default function ServicesPage() {
           <strong>Active Inquiry Management:</strong> We bring potential buyers
           closer to the finish line by facilitating the exchange of
           high-resolution photos and live video tours via WhatsApp, the use of a
-          <strong>Third party Inspection is Strongly Encouraged</strong> by
+          <strong> Third party Inspection is Strongly Encouraged</strong> by
           Sellers & Potential Buyers to ensuring all parties can make an
           informed decision with confidence.
         </p>
