@@ -29,7 +29,7 @@ const Page = () => {
       <Banner
         image="/ExpertAdvice.avif"
         title="Terms & Conditions"
-        subtitle="Important legal and operational information for buyers and users of Collector Car Depot."
+        subtitle=""
       />
       <ClassicCarAdvice />
       <StockCard />
