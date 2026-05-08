@@ -30,7 +30,7 @@ const Home = () => {
       <Banner
         video="/3066415-uhd_4096_2160_24fps.mp4"
         title="Welcome To Collector Car Depot"
-        subtitle="Proudly SOLD By Collector Car Depot "
+        subtitle="Marketing Services Provider and Facilitator"
       />
 
       <FilterCar />

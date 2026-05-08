@@ -8,8 +8,9 @@ const page = () => {
     <div className='bg-white'>
     <Banner
         video="/3066415-uhd_4096_2160_24fps.mp4"
-        title="Welcome To Collector Car Depot"
-        subtitle="Collector & Performance Car Brokers"
+        // title="Welcome To Collector Car Depot"
+        title="Proudly Sold by Collector Car Depot"
+        subtitle=""
       />
       <CarSolds/>
       <Testimonials />
