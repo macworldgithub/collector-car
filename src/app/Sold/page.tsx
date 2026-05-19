@@ -1,18 +1,17 @@
-  
-import React from 'react';
-import Banner from "@/components/Banner";  
-import Testimonials from './Testimonial';
-import CarSolds from './CarSolds'
+import React from "react";
+import Banner from "@/components/Banner";
+import Testimonials from "./Testimonial";
+import CarSolds from "./CarSolds";
 const page = () => {
   return (
-    <div className='bg-white'>
-    <Banner
+    <div className="bg-white">
+      <Banner
         video="/3066415-uhd_4096_2160_24fps.mp4"
         // title="Welcome To Collector Car Depot"
-        title="Proudly Sold by Collector Car Depot"
+        title="Sold Via Collector Car Depot"
         subtitle=""
       />
-      <CarSolds/>
+      <CarSolds />
       <Testimonials />
     </div>
   );
