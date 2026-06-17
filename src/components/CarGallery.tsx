@@ -182,7 +182,7 @@ const CarGallery = forwardRef<HTMLElement, CarGalleryProps>(
     };
 
     return (
-      <section ref={ref} className="px-4 md:px-12 lg:px-20 py-10 text-black">
+      <section ref={ref} className="px-4 md:px-12 lg:px-20  text-black">
         {/* Enquiry Section */}
         <div className="text-center mb-10">
           <p className="text-sm md:text-base">Interested in this vehicle ?</p>

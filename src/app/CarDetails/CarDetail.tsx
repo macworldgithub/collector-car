@@ -377,7 +377,7 @@ const CarDetail: React.FC<CarDetailsProps> = ({
   };
 
   return (
-    <section className="px-4 md:px-12 lg:px-20 py-10 text-black bg-white">
+    <section className="px-4 md:px-12 lg:px-20  text-black bg-white">
       <h2 className="text-center text-2xl md:text-3xl font-bold mb-8 tracking-wide">
         DESCRIPTION
       </h2>
