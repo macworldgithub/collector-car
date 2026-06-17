@@ -141,25 +141,20 @@ export default function ClassicCarAdvice() {
           <h3 className="text-lg font-semibold">3. Buyer Due Diligence</h3>
           <p className="font-medium">
             <strong>
-              ALL PROSPECTIVE BUYERS ARE STRONGLY ENCOURAGED to conduct thorough
-              due diligence prior to purchase.
+             All Prospective Buyers are encouraged to conduct due diligence prior to purchase.
             </strong>
           </p>
           <p>This includes:</p>
           <ul className="list-disc pl-6 space-y-2 text-sm md:text-base">
             <li>
-              <strong> In-Person Inspection:</strong> Arranging a physical
-              inspection of the vehicle.
+              <strong> In-Person Inspection:</strong>  Arranging a personal inspection of the vehicle in person.
             </li>
             <li>
-              <strong>Professional Consultation:</strong> Engaging an
-              independent mechanic or registered vehicle inspector to verify
-              condition and details.
+              <strong>Professional Consultation:</strong> Consulting with a registered vehicle repairer or independent inspection to verify the vehicle's details and condition.
             </li>
             <li>
-              <strong>Virtual Inspection:</strong> Utilizing our detailed
-              photography or requesting a live video connection (e.g., WhatsApp,
-              FaceTime, Zoom) to view the vehicle remotely.
+              <strong>Virtual Inspection:</strong> Utilising our detailed website photographs and, upon arrangement, we can conduct a live video connection (via WhatsApp, FaceTime, FaceBook Messenger, or Zoom) to view the car up close via your device.
+
             </li>
           </ul>
         </div>
