@@ -84,25 +84,25 @@ export default function Navbar() {
             onClick={() => setOpen(true)}
             className="flex items-center space-x-2"
           >
-            <Menu className="w-12 h-12" />
+            <Menu className="max-md:w-8 max-md:h-8 md:w-12 md:h-12" />
             <span className="font-semibold text-lg md:text-xl hidden md:inline">Menu</span>
           </button>
 
           {/* Center - Logo */}
-          <div
-            className="flex-1 flex justify-center cursor-pointer"
-            onClick={() => navigation.push("/")}
-          >
-            <Image
-              src="/logo.png"
-              alt="Collector Car Depot"
-              width={160}
-              height={70}
-              priority
-              className="object-contain"
-            />
-          </div>
-
+      
+<div
+  className="flex-1 flex justify-center cursor-pointer"
+  onClick={() => navigation.push("/")}
+>
+  <Image
+    src="/logo.png"
+    alt="Collector Car Depot"
+    width={160}
+    height={70}
+    priority
+    className="object-contain w-[100px] sm:w-[120px] md:w-[140px] lg:w-[160px] h-auto"
+  />
+</div>
           {/* Right - Contact Info (Desktop / Tablet) */}
           {/* Right - Contact Info (Desktop / Tablet) */}
 <div className="hidden md:block text-center">

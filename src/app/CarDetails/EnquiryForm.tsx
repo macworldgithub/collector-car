@@ -236,8 +236,8 @@ export default function EnquiryForm() {
   };
 
   return (
-    <section  id="enquiry-form" className="px-4 md:px-12 lg:px-20 py-10 ">
-      <h2 className="text-center text-2xl font-bold mb-6 text-black">
+    <section  id="enquiry-form" className="px-4 md:px-12 lg:px-20">
+      <h2 className="text-center  text-2xl font-bold mb-6 text-black">
         Enquire about this vehicle
       </h2>
 
