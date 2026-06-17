@@ -28,3 +28,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Increase Lightbox Controls Size */
+.yarl__button {
+  width: 64px !important;
+  height: 64px !important;
+  padding: 12px !important;
+}
+
+.yarl__icon {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+/* Shift navigation arrows and toolbar inward so they don't clip on the edge */
+.yarl__navigation_next,
+.yarl__toolbar {
+  margin-right: 20px !important;
+}
+
+.yarl__navigation_prev {
+  margin-left: 20px !important;
+}

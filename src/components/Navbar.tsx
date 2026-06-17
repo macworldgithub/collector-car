@@ -84,8 +84,8 @@ export default function Navbar() {
             onClick={() => setOpen(true)}
             className="flex items-center space-x-2"
           >
-            <Menu className="w-9 h-9" />
-            <span className="font-semibold hidden md:inline">Menu</span>
+            <Menu className="w-12 h-12" />
+            <span className="font-semibold text-lg md:text-xl hidden md:inline">Menu</span>
           </button>
 
           {/* Center - Logo */}
@@ -96,8 +96,8 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="Collector Car Depot"
-              width={120}
-              height={50}
+              width={160}
+              height={70}
               priority
               className="object-contain"
             />

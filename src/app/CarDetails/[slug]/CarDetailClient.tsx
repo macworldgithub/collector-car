@@ -235,6 +235,7 @@ export default function CarDetailClient() {
             youtubeLinks={car.youtubeLinks || []}
             videos={car.videos || []}
             images={displayImages}
+            //@ts-ignore
             imageKeys={car.imageKeys || []}
           />
         </section>
